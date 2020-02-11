@@ -6,4 +6,4 @@ app.use("/public", express.static("./public"));
 app.get("/", (req, res)=>{
     res.render("index.ejs");//使用する変数を第２引数としてかく
   });
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(80, () => console.log('Example app listening on port 80!'))
