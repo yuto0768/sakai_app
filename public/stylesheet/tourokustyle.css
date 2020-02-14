@@ -1,0 +1,23 @@
+header {
+    height: 65px;
+    width: 100%;
+    background-color: rgba(34, 49, 52, 0.9);
+    position : fixed;
+    top :0;
+    z-index : 10;
+     }
+
+ .header-center {
+    text-align:center;
+    padding:0px;
+    font-size:300%;
+    font-family:cursive;
+    color:white
+     }
+    
+ .main {
+    background-image:url(/public/images/login_touroku/touroku_back.jpg);
+  }
+  body {
+    background: red;
+}
