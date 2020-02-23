@@ -27,7 +27,7 @@ header {
  html {
     background-size: cover;
     background-repeat: no-repeat;
-    background-image:url(/public/images/login_touroku/touroku_back.jpg);
+    background-image:url(/public/images/login_touroku/loginback.jpg);
   }
 
 .form {
