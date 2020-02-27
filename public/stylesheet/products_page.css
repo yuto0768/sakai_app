@@ -48,3 +48,12 @@ header {
     background-color: chocolate;
     margin:100px;
 }
+
+.product-title{
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.product-list .col{
+  text-align: center;
+}
