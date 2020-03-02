@@ -1,38 +1,48 @@
-header {
-    height: 65px;
-    width: 100%;
-    background-color: rgba(34, 49, 52, 0.9);
-    position : fixed;
-    top :0;
-    z-index : 10;
-  }
+/*
+  .main-sentense {
+    height: 700px;
+    padding: 200px;
+  }*/
 
-.container {
-    width: 1170px;
-    padding: 0 15px;
-    margin: 0 auto;
-  }
-  .header-right {
-    float: right;
-    background-color: rgba(255, 255, 255, 0.3);
-    transition: all 0.5s;
-  }
-  
-  .header-right:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .header-right a {
-    line-height: 65px;
-    padding: 0 25px;
-    color: white;
-    display: block;
-  }
+.products-info {
+    /*float: left;*/
+    font-size: 2em;
+}
 
-  .header-center {
-    text-align:center;
-    padding:0px;
-    font-size:300%;
-    font-family:cursive;
-    color:white
-  }
+h2 {
+    margin-left: 2.5em;
+}
+
+.products-info h2 {
+    margin-left: 200px;
+    font-size: 2em;
+    color: #3F0B0B;
+    font-family: SimSun-ExtB;
+}
+
+.products-info h1 {
+    margin-left: 130px;
+    font-size: 2em;
+    color: #E43A3A;
+    font-family: SimSun-ExtB;
+}
+
+.explain {
+    width: 520px;
+    height: 200px;
+    margin-top: 100px;
+    font-family: SimSun-ExtB;
+}
+
+.col p {
+    font-size: 2em;
+    padding-left: 3em;
+}
+
+.size-price {
+    background-color: crimson;
+}
+
+.products-option label {
+    border-radius: 1em;
+}
