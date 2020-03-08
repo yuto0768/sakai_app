@@ -21,14 +21,12 @@ app.get("/login", (req, res) => {
 
 app.use(require("express-ejs-layouts"))
 
-app.get("/products/details", (req, res) => {
-  res.render("details_page.ejs");//使用する変数を第２引数としてかく
-});
-
-app.use(require("express-ejs-layouts"))
-
 app.get("/products", (req, res) => {
   res.render("products_page.ejs", { layout: "layout_login.ejs" });//使用する変数を第２引数としてかく
+});
+
+app.get("/products/details", (req, res) => {
+  res.render("details_page.ejs");//使用する変数を第２引数としてかく
 });
 
 app.get("/products/details/purchase", (req, res) => {
