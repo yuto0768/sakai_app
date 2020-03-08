@@ -1,117 +1,138 @@
 <link rel="stylesheet" href="/public/stylesheet/purchase.css">
-<div class="container">
-    <h2>注文内容</h2>
-    <p class="box"></p>
-</div>
-<div class="main-sentense">
-    <div class="products-info">
-        <img src="/public/images/products_img/32060180.jpg" alt="写真" width="500" height="400">
-    </div>
-    <div class="products-info" style="margin:100px auto auto auto;">
-        <h2>converse</h2>
-        <p><img src="/public/images/products_img/chuck-taylor.png" alt="写真" width="150" height="70"
-                style="margin:1em 1em 1em 8em ;">
-        </p>
-        <h1>CHUCK TAYLOR</h1>
-    </div>
-</div>
-<form class="form-horizontal">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">氏名(漢字)</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">氏名(カナ)</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">電話番号</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">メールアドレス</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">郵便番号</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">都道府県</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">住所(都市区)</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">住所(上記以降)</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">住所(マンション名等)</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-    </div>
-    <div class="container">
-        <h2>お支払い方法</h2>
-        <p class="box"></p>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-10 radio">
-            <label><input type="radio" name="radio">代金引換</label>
-            <label><input type="radio" name="radio">クレジットカード</label>
-        </div>
-        <label class="col-sm-2 control-label">カード番号</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text">
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default">購入する</button>
+<div class="main">
+    <div class="container confirm">
+        <p>ご注文内容</p>
+        <hr size="5" color="blue">
+        <div class="row information">
+            <div class="col-6">
+                <div class="products-info">
+                    <img src="/public/images/products_img/32060180.jpg" alt="写真">
+                </div>
+                <div class="col-6 chuck-taylor">
+                    <h2>converse</h2>
+                    <img src="/public/images/products_img/chuck-taylor.png">
+                    <h1>CHUCK TAYLOR</h1>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <h2>配達日時</h2>
-        <p class="box"></p>
+    <div class="container private-info">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>ご注文様</legend>
+                <hr size="5" color="blue">
+                <div class="row form-group">
+                    <label for="name">お名前</label>
+                    <div class="col">
+                        <input type="text" name="name1" id="name1" class="form-control" placeholder="姓">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="name2" id="name2" class="form-control" placeholder="名">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="kana">お名前（フリガナ）</label>
+                    <div class="col">
+                        <input type="text" name="kana1" id="kana1" class="form-control" placeholder="セイ">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="kana2" id="kana2" class="form-control" placeholder="メイ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zipcode">郵便番号</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">〒</span>
+                        <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="000-0000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pref">住所</label>
+                    <select name="pref" id="pref" class="form-control">   
+                    <option value="北海道">北海道</option>       
+                    <option value="青森県">青森県</option>        
+                    <option value="岩手県">岩手県</option>       
+                    <option value="宮城県">宮城県</option>    
+                    <option value="秋田県">秋田県</option>    
+                    <option value="山形県">山形県</option>
+                    <option value="福島県">福島県</option>     
+                    <option value="茨城県">茨城県</option>    
+                    <option value="栃木県">栃木県</option>     
+                    <option value="群馬県">群馬県</option>      
+                    <option value="埼玉県">埼玉県</option>     
+                    <option value="千葉県">千葉県</option>       
+                    <option value="東京都">東京都</option>    
+                    <option value="神奈川県">神奈川県</option>       
+                    <option value="新潟県">新潟県</option>      
+                    <option value="山梨県">山梨県</option>       
+                    <option value="長野県">長野県</option>       
+                    <option value="富山県">富山県</option>       
+                    <option value="石川県">石川県</option>        
+                    <option value="福井県">福井県</option>       
+                    <option value="岐阜県">岐阜県</option>       
+                    <option value="静岡県">静岡県</option>      
+                    <option value="愛知県">愛知県</option>       
+                    <option value="三重県">三重県</option>      
+                    <option value="滋賀県">滋賀県</option>    
+                    <option value="京都府">京都府</option>
+                    <option value="大阪府">大阪府</option>  
+                    <option value="兵庫県">兵庫県</option>  
+                    <option value="奈良県">奈良県</option>   
+                    <option value="和歌山県">和歌山県</option>   
+                    <option value="鳥取県">鳥取県</option>    
+                    <option value="島根県">島根県</option>   
+                    <option value="岡山県">岡山県</option>    
+                    <option value="広島県">広島県</option>     
+                    <option value="山口県">山口県</option>
+                    <option value="徳島県">徳島県</option>
+                    <option value="香川県">香川県</option>  
+                    <option value="愛媛県">愛媛県</option>    
+                    <option value="高知県">高知県</option>       
+                    <option value="福岡県">福岡県</option>       
+                    <option value="佐賀県">佐賀県</option>        
+                    <option value="長崎県">長崎県</option>        
+                    <option value="熊本県">熊本県</option>        
+                    <option value="大分県">大分県</option>        
+                    <option value="宮崎県">宮崎県</option>       
+                    <option value="鹿児島県">鹿児島県</option>        
+                    <option value="沖縄県">沖縄県</option>       
+                  </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="addr1" id="addr1" class="form-control" placeholder="市区町村名">
+                    <p class="help-block">住所は2つに分けてご記入ください。</p>
+                    <input type="text" name="addr2" id="addr2" class="form-control" placeholder="番地・ビル名">
+                    <p class="help-block">マンション名は必ず記入してください。</p>
+                </div>
+                <div class="form-group"></div>
+                <label for="tel">電話番号</label>
+                <div class="input-group">
+                    <input type="tel" name="tel1" id="tel1" class="form-control" placeholder="080">
+                    <span class="input-group-addon">-</span>
+                    <input type="tel" name="tel2" id="tel2" class="form-control" placeholder="0000">
+                    <span class="input-group-addon">-</span>
+                    <input type="tel" name="tel3" id="tel3" class="form-control" placeholder="0000">
+                </div>
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="メールアドレスを入力してください">
+                </div>
+                <div class="row">
+                    <p>代金引換</p>
+                    <div class="form-check">
+                        <input type="radio" name="cash" id="cash" value="option1">
+                        <label for="cash"></label>
+                    </div>
+                    <p>クレジットカード</p>
+                    <div class="form-check">
+                        <input type="radio" name="credit" id="credit" value="option1">
+                        <label for="credit"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-lg">　確　認　</button>
+                </div>
     </div>
-    <div class="radio">
-        <label><input type="radio" name="radio" id="" value="希望なし">希望なし</label>
-    </div>
-    <div class="radio">
-        <label><input type="radio" name="radio" id="radio2" value="午前中">午前中</label>
-    </div>
-    <div class="radio">
-        <label><input type="radio" name="radio" id="radio2" value="12~14時">12~14時</label>
-    </div>
-    <div class="radio">
-        <label><input type="radio" name="radio" id="radio2" value="14~16時">14~16時</label>
-    </div>
-    <div class="radio">
-        <label><input type="radio" name="radio" id="radio2" value="16~18時">16~18時</label>
-    </div>
-    <div class="radio">
-        <label><input type="radio" name="radio" id="radio2" value="18~20時">18~20時</label>
-    </div>
-</form>
-<div class="purchase-btn">
-    <button type="button" class="btn btn-success">購入</button>
+    </fieldset>
+    </form>
 </div>
