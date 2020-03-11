@@ -1,6 +1,8 @@
 var http = require("http");
 var express = require("express");
 var app = express();
+var db = require("./data/MyDatabase")
+var { User } = db
 
 //app.get('/', (req, res) => res.send('Hello World!'))
 app.use("/public", express.static("./public"));
@@ -14,9 +16,16 @@ app.get("/touroku", (req, res) => {
     res.render("touroku_page.ejs"); //使用する変数を第２引数としてかく
 });
 
+async function showUser(req, res, id) {
+    let user = await User.findOne({ id: id });
+    console.log(user.name);
+    res.render("login_page.ejs"); //使用する変数を第２引数としてかく
+}
+
 
 app.get("/login", (req, res) => {
-    res.render("login_page.ejs"); //使用する変数を第２引数としてかく
+    //res.render("login_page.ejs"); //使用する変数を第２引数としてかく
+    showUser(req, res, 1);
 });
 
 app.use(require("express-ejs-layouts"))
