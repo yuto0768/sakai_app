@@ -56,10 +56,19 @@ h2 {
     margin: 10px 10px;
 }
 
+.price {
+    margin-top: 2em;
+}
+
 .price p {
     font-size: 4em;
+    margin-bottom: 0em;
 }
 
 .price span {
     font-size: 0.5em;
+}
+
+.purchase-btn {
+    margin-top: 5em;
 }

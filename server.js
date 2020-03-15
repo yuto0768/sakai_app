@@ -42,6 +42,8 @@ app.get("/products/details/purchase", (req, res) => {
     res.render("purchase.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
 });
 
-
+app.get("/products/details/purchase/confirm", (req, res) => {
+    res.render("confirm.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
+});
 
 app.listen(80, () => console.log('Example app listening on port 80!'))

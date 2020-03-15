@@ -1,0 +1,25 @@
+.sentense {
+    text-align: center;
+    margin-top: 250px;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+.sentense p {
+    font-size: 1.5em;
+}
+
+.sub {
+    margin-top: 100px;
+}
+
+.top-btn {
+    margin-top: 100px;
+}
+
+.top-disp {
+    margin-top: 1em;
+    margin-left: 300px;
+}
