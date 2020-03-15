@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize("postgres://postgres:samurai-db@database-1.c7jrdb3lf368.ap-northeast-1.rds.amazonaws.com:5432/postgres")
+//://user_id:password@URL/DB
+const sequelize = new Sequelize("postgres://sakai0768:p9y9TXCY@samurai-test.cl5rilsmm17j.ap-northeast-1.rds.amazonaws.com:5432/postgres")
 const Op = Sequelize.Op;
 
 const IdType = {
@@ -17,11 +18,11 @@ function test() {
             console.error('Unable to connect to the database:', err);
         });
 }
-
+//User:class名　　　　　　　　　　//user:テーブル名
 const User = sequelize.define('user', {
     //これは通し番号です
     id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER, //型名
         autoIncrement: true,
         primaryKey: true,
     },
@@ -51,11 +52,11 @@ const User = sequelize.define('user', {
         allowNull: true,
     },
 }, {
-    timestamps: true
+    timestamps: true　 //行作成日時更新日時自動追加
 });
 
-async function setup() {
-    await sequelize.sync({ force: true })
+async function setup() {　　 //force:trueでデータ全削除
+    await sequelize.sync({ force: true }) //await:promiseの短縮(then実行で次へ)
         // テスト用のユーザーを1件登録
     let tanaka = await User.create({ name: "tanaka", idType: IdType.Mail, password: "pass" })
 }

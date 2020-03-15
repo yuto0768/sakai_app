@@ -51,5 +51,15 @@ h2 {
 }
 
 .products-option label {
+    font-size: 3em;
     border-radius: 1em;
+    margin: 10px 10px;
+}
+
+.price p {
+    font-size: 4em;
+}
+
+.price span {
+    font-size: 0.5em;
 }
