@@ -1,8 +1,20 @@
 const router = require("express").Router();
+const db = require("../data/MyDatabase")
+const { Product } = require("../data/MyDatabase")
+
+
+async function getProducts(req, res) {
+    let rows = await Product.findAll()
+    res.render("products_page.ejs", { layout: "layout_login.ejs", rows });
+}
 
 
 router.get("/", (req, res) => {
-    res.render("products_page.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
+    getProducts(req, res)
+        // Product.findAll()
+        //     .then((rows) => {
+        //         res.render("products_page.ejs", { layout: "layout_login.ejs", rows }); //使用する変数を第２引数としてかく
+        //     })
 });
 
 router.get("/details", (req, res) => {

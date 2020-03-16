@@ -16,6 +16,19 @@
 
 <div class="container product-list">
     <div class="row">
+        <% for(row of rows){ %>
+            <div class="product">
+                <div>
+                    <a href="/products/details?id=<%= row.id %>"><img src="/public/images/products_img/<%= row.image %>" alt="写真" width="300" height="300"></a>
+                </div>
+                <div class="product-title">
+                    <%= row.name %>
+                </div>
+            </div>
+            <% } %>
+    </div>
+
+    <div class="row">
         <div class="col">
             <div>
                 <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>

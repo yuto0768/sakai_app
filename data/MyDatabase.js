@@ -55,15 +55,57 @@ const User = sequelize.define('user', {
     timestamps: true　 //行作成日時更新日時自動追加
 });
 
+const Product = sequelize.define('products', {
+    //これは通し番号です
+    id: {
+        type: Sequelize.INTEGER, //型名
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    // 以下、各列に対応します
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    color: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    size: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    info: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+    image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+    price: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+}, {
+    timestamps: true　 //行作成日時更新日時自動追加
+});
 async function setup() {　　 //force:trueでデータ全削除
     await sequelize.sync({ force: true }) //await:promiseの短縮(then実行で次へ)
         // テスト用のユーザーを1件登録
     let tanaka = await User.create({ name: "tanaka", idType: IdType.Mail, password: "pass" })
+    await Product.create({ name: "Converse", color: "RED,WHITE,BLACK", size: "24.5cm,25.0cm,25.5cm,26.0cm,26.5cm,27.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    await Product.create({ name: "Converse2", color: "BLACK", size: "25.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    await Product.create({ name: "Converse3", color: "BLACK", size: "26.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    await Product.create({ name: "Converse4", color: "BLACK", size: "26.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    await Product.create({ name: "Converse5", color: "BLACK", size: "27.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
 }
 
 test()
 setup()
 
 module.exports = {
-    User
+    User,
+    Product
 }

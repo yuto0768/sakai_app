@@ -100,3 +100,7 @@ container要素を変更すると、予測不能な動作になります
     background-color: khaki;
 }
 */
+
+.product {
+    width: 15em;
+}
