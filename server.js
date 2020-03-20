@@ -32,5 +32,7 @@ app.use(require("express-ejs-layouts"))
 
 app.use("/products", require("./router/products"));
 
+app.use("/", require("./router/top_page"));
+
 
 app.listen(80, () => console.log('Example app listening on port 80!'))
