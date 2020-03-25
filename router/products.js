@@ -8,6 +8,10 @@ async function getProducts(req, res) {
     res.render("products/products.ejs", { layout: "layout_login.ejs", rows });
 }
 
+async function getProduct(req, res, id) {
+    let product = await Product.findOne({ where: { id: id } })
+    res.render("products/details.ejs", { layout: "layout_login.ejs", product });
+}
 
 router.get("/", (req, res) => {
     getProducts(req, res)
@@ -17,16 +21,20 @@ router.get("/", (req, res) => {
         //     })
 });
 
-router.get("/details", (req, res) => {
-    res.render("products/details.ejs"); //使用する変数を第２引数としてかく
-});
-
-router.get("/details/purchase", (req, res) => {
+router.get("/:id/purchase", (req, res) => {
     res.render("products/purchase.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
 });
 
-router.get("/details/purchase/confirm", (req, res) => {
-    res.render("confirm.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
+router.post("/:id/save", (req, res) => {
+    res.redirect("/products/confirm")
+});
+
+router.get("/confirm", (req, res) => {
+    res.render("products/confirm.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
+});
+
+router.get("/:id", (req, res) => {
+    getProduct(req, res, req.params.id)
 });
 
 module.exports = router;

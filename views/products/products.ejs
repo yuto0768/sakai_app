@@ -19,7 +19,7 @@
         <% for(row of rows){ %>
             <div class="product">
                 <div>
-                    <a href="/products/details?id=<%= row.id %>"><img src="/public/images/products_img/<%= row.image %>" alt="写真" width="300" height="300"></a>
+                    <a href="/products/<%= row.id %>"><img src="/public/images/products_img/<%= row.image %>" alt="写真" width="300" height="300"></a>
                 </div>
                 <div class="product-title">
                     <%= row.name %>
