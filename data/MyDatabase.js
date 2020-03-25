@@ -90,6 +90,48 @@ const Product = sequelize.define('products', {
 }, {
     timestamps: true　 //行作成日時更新日時自動追加
 });
+
+const Purchase = sequelize.define('purchase', {
+    //これは通し番号です
+    id: {
+        type: Sequelize.INTEGER, //型名
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    // 以下、各列に対応します
+    name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
+    hurigana: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
+    address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
+    phone: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
+    mail: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
+    payment: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+}, {
+    timestamps: true　 //行作成日時更新日時自動追加
+});
+
 async function setup() {　　 //force:trueでデータ全削除
     await sequelize.sync({ force: true }) //await:promiseの短縮(then実行で次へ)
         // テスト用のユーザーを1件登録
