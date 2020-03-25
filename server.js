@@ -4,9 +4,13 @@ var app = express();
 var db = require("./data/MyDatabase")
 var { User } = db
 
+
 //app.get('/', (req, res) => res.send('Hello World!'))
 app.use("/public", express.static("./public"));
 app.set("view engine", "ejs")
+    //フォーム機能を使用するために必要
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 
 

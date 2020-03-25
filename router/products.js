@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const db = require("../data/MyDatabase")
-const { Product } = require("../data/MyDatabase")
+const { Product, Purchase } = require("../data/MyDatabase")
 
 
 async function getProducts(req, res) {
@@ -12,6 +12,20 @@ async function getProduct(req, res, id) {
     let product = await Product.findOne({ where: { id: id } })
     res.render("products/details.ejs", { layout: "layout_login.ejs", product });
 }
+
+async function purchaseProduct(req, res) {
+    let purchase = await Purchase.create({
+        name: `${req.body.name1}:${req.body.name2}`,
+        hurigana: `${req.body.kana1}:${req.body.kana2}`,
+        zipcode: req.body.zipcode,
+        address: req.body.pref,
+        phone: `${req.body.tel1}:${req.body.tel2}:${req.body.tel3}`,
+        mail: req.body.email,
+        payment: req.body.payment
+    })
+    res.redirect("/products/confirm");
+}
+
 
 router.get("/", (req, res) => {
     getProducts(req, res)
@@ -25,8 +39,8 @@ router.get("/:id/purchase", (req, res) => {
     res.render("products/purchase.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
 });
 
-router.post("/:id/save", (req, res) => {
-    res.redirect("/products/confirm")
+router.post("/:id/purchase", (req, res) => {
+    purchaseProduct(req, res)
 });
 
 router.get("/confirm", (req, res) => {

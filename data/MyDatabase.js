@@ -109,6 +109,11 @@ const Purchase = sequelize.define('purchase', {
         allowNull: true,
     },
 
+    zipcode: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
     address: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -149,5 +154,6 @@ setup()
 
 module.exports = {
     User,
-    Product
+    Product,
+    Purchase
 }
