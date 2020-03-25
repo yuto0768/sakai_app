@@ -5,7 +5,7 @@ const { Product } = require("../data/MyDatabase")
 
 async function getProducts(req, res) {
     let rows = await Product.findAll()
-    res.render("products_page.ejs", { layout: "layout_login.ejs", rows });
+    res.render("products/products.ejs", { layout: "layout_login.ejs", rows });
 }
 
 
@@ -18,11 +18,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/details", (req, res) => {
-    res.render("details_page.ejs"); //使用する変数を第２引数としてかく
+    res.render("products/details.ejs"); //使用する変数を第２引数としてかく
 });
 
 router.get("/details/purchase", (req, res) => {
-    res.render("purchase.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
+    res.render("products/purchase.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
 });
 
 router.get("/details/purchase/confirm", (req, res) => {
