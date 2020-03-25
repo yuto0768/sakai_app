@@ -8,9 +8,7 @@ var { User } = db
 app.use("/public", express.static("./public"));
 app.set("view engine", "ejs")
 
-app.get("/", (req, res) => {
-    res.render("top_page.ejs"); //使用する変数を第２引数としてかく
-});
+
 
 app.get("/touroku", (req, res) => {
     res.render("touroku_page.ejs"); //使用する変数を第２引数としてかく

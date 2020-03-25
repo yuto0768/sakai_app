@@ -46,10 +46,6 @@ h2 {
     padding-left: 3em;
 }
 
-.size {
-    background-color: crimson;
-}
-
 .products-option label {
     font-size: 3em;
     border-radius: 1em;
@@ -57,7 +53,7 @@ h2 {
 }
 
 .price {
-    margin-top: 2em;
+    margin-top: auto;
 }
 
 .price p {
@@ -70,5 +66,9 @@ h2 {
 }
 
 .purchase-btn {
-    margin-top: 5em;
+    margin-top: 1em;
+}
+
+.info {
+    margin-top: 2em;
 }
