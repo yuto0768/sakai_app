@@ -1,8 +1,13 @@
 const router = require("express").Router();
 var { Product } = require("../data/MyDatabase");
 
+async function getProducts(req, res) {
+    let rows = await Product.findAll()
+    res.render("admin/list.ejs", { rows });
+}
+
 router.get("/", (req, res) => {
-    res.render("admin/list.ejs"); //使用する変数を第２引数としてかく
+    getProducts(req, res)
 });
 
 router.get("/add", (req, res) => {

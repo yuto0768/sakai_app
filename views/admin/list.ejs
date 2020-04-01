@@ -1,1 +1,22 @@
 <h1>LISTです</h1>
+<div class="container">
+    <div class="row">
+        <a class="btn btn-primary" href="./add">新規登録</a>
+    </div>
+    <div class="row">
+        <table>
+            <% for(row of rows){ %>
+                <tr>
+                    <td>
+                        <a href="./<%= row.id %>"><img src="/public/images/products_img/<%= row.image %>" alt="写真" width="100"></a>
+                    </td>
+                    <td>
+                        <a href="./<%= row.id %>">
+                            <%= row.name %>
+                        </a>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+</div>
