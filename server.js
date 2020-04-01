@@ -34,6 +34,8 @@ app.use(require("express-ejs-layouts"))
 
 app.use("/products", require("./router/products"));
 
+app.use("/admin", require("./router/admin"));
+
 app.use("/", require("./router/top_page"));
 
 
