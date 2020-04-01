@@ -8,9 +8,20 @@ async function getProducts(req, res) {
 
 async function getProduct(req, res, id) {
     let row = await Product.findOne({ where: { id: id } })
-    res.render("admin/edit.ejs", { row });
+    res.render("admin/edit.ejs", { row }); //ejsで使う変数を｛｝の中に書く
 }
 
+async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
+    let row = await Product.findOne({ where: { id: id } })
+        // let row = new Product()
+    row.name = req.body.name;
+    row.info = req.body.info;
+    row.size = req.body.size;
+    row.color = req.body.color;
+    row.price = req.body.price;
+    await row.save();
+    res.redirect("/admin");
+}
 
 async function deleteProduct(req, res, id) {
     await Product.destroy({ where: { id: id } })
@@ -33,4 +44,7 @@ router.post("/:id/delete", (req, res) => {
     deleteProduct(req, res, req.params.id)
 });
 
+router.post("/:id/update", (req, res) => {
+    updateProduct(req, res, req.params.id)
+});
 module.exports = router;
