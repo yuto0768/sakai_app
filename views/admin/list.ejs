@@ -8,10 +8,10 @@
             <% for(row of rows){ %>
                 <tr>
                     <td>
-                        <a href="./<%= row.id %>"><img src="/public/images/products_img/<%= row.image %>" alt="写真" width="100"></a>
+                        <a href="/admin/<%= row.id %>"><img src="/public/images/products_img/<%= row.image %>" alt="写真" width="100"></a>
                     </td>
                     <td>
-                        <a href="./<%= row.id %>">
+                        <a href="/admin/<%= row.id %>">
                             <%= row.name %>
                         </a>
                     </td>
