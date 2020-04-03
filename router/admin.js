@@ -23,6 +23,18 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
     res.redirect("/admin");
 }
 
+async function addProduct(req, res, id) { //formで送られてきた情報はreqに入る
+    let row = await Product.create()
+        // let row = new Product()
+    row.name = req.body.name;
+    row.info = req.body.info;
+    row.size = req.body.size;
+    row.color = req.body.color;
+    row.price = req.body.price;
+    await row.save();
+    res.redirect("/admin");
+}
+
 async function deleteProduct(req, res, id) {
     await Product.destroy({ where: { id: id } })
     res.redirect("/admin");
@@ -47,4 +59,10 @@ router.post("/:id/delete", (req, res) => {
 router.post("/:id/update", (req, res) => {
     updateProduct(req, res, req.params.id)
 });
+
+router.post("/:id/add", (req, res) => {
+    addProduct(req, res, req.params.id)
+});
+
+
 module.exports = router;
