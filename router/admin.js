@@ -13,7 +13,7 @@ async function getProduct(req, res, id) {
 
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
     let row = await Product.findOne({ where: { id: id } })
-        // let row = new Product()
+    // let row = new Product()
     row.name = req.body.name;
     row.info = req.body.info;
     row.size = req.body.size;
@@ -25,7 +25,7 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
 
 async function addProduct(req, res, id) { //formで送られてきた情報はreqに入る
     let row = await Product.create()
-        // let row = new Product()
+    // let row = new Product()
     row.name = req.body.name;
     row.info = req.body.info;
     row.size = req.body.size;
@@ -41,6 +41,10 @@ async function deleteProduct(req, res, id) {
 }
 
 router.get("/", (req, res) => {
+    if (!req.originalUrl.endsWith("/")) {
+        res.redirect("/admin/")
+        return
+    }
     getProducts(req, res)
 });
 
