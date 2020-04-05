@@ -41,7 +41,7 @@ async function deleteProduct(req, res, id) {
 }
 
 router.get("/", (req, res) => {
-    if (!req.originalUrl.endsWith("/")) {
+    if (!req.originalUrl.endsWith("/")) { //URLの最後が/で終わっていないとき４５行目へ
         res.redirect("/admin/")
         return
     }
