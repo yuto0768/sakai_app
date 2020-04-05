@@ -23,15 +23,15 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
     res.redirect("/admin");
 }
 
-async function addProduct(req, res, id) { //formで送られてきた情報はreqに入る
-    let row = await Product.create()
+async function addProduct(req, res) { //formで送られてきた情報はreqに入る
+    let data = new Product()
         // let row = new Product()
-    row.name = req.body.name;
-    row.info = req.body.info;
-    row.size = req.body.size;
-    row.color = req.body.color;
-    row.price = req.body.price;
-    await row.save();
+    data.name = req.body.name;
+    data.info = req.body.info;
+    data.size = req.body.size;
+    data.color = req.body.color;
+    data.price = req.body.price;
+    await data.save();
     res.redirect("/admin");
 }
 
@@ -49,7 +49,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/add", (req, res) => {
-    res.render("admin/add.ejs"); //使用する変数を第２引数としてかく
+    let data = new Product()
+    res.render("admin/add.ejs", { data }); //使用する変数を第２引数としてかく
 });
 
 router.get("/:id", (req, res) => {
@@ -64,8 +65,8 @@ router.post("/:id/update", (req, res) => {
     updateProduct(req, res, req.params.id)
 });
 
-router.post("/:id/add", (req, res) => {
-    addProduct(req, res, req.params.id)
+router.post("/add", (req, res) => {
+    addProduct(req, res)
 });
 
 

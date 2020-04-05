@@ -2,15 +2,15 @@
 <form action="./add" method="POST">
     <dl>
         <dt>商品名</dt>
-        <dd><input type="text" value="<%=row.name%>" name="name"></dd>
+        <dd><input type="text" value="<%=data.name%>" name="name"></dd>
         <dt>情報</dt>
-        <dd><input type="text" value="<%=row.info%>" name="info"></dd>
+        <dd><input type="text" value="<%=data.info%>" name="info"></dd>
         <dt>サイズ</dt>
-        <dd><input type="text" value="<%=row.size%>" name="size"></dd>
+        <dd><input type="text" value="<%=data.size%>" name="size"></dd>
         <dt>カラー</dt>
-        <dd><input type="text" value="<%=row.color%>" name="color"></dd>
+        <dd><input type="text" value="<%=data.color%>" name="color"></dd>
         <dt>価格</dt>
-        <dd><input type="text" value="<%=row.price%>" name="price"></dd>
+        <dd><input type="text" value="<%=data.price%>" name="price"></dd>
     </dl>
     <input type="submit" value="保存" class="btn btn-primary">
 </form>
