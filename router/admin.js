@@ -25,14 +25,37 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
 
 async function addProduct(req, res) { //formで送られてきた情報はreqに入る
     let data = new Product()
+    let error = {}
         // let row = new Product()
     data.name = req.body.name;
     data.info = req.body.info;
     data.size = req.body.size;
     data.color = req.body.color;
     data.price = req.body.price;
-    await data.save();
-    res.redirect("/admin");
+
+    if (!data.name) {
+        error.name = "名前を入力してください。"
+    }
+    if (!data.info) {
+        error.info = "情報を入力してください。"
+    }
+    if (!data.size) {
+        error.size = "サイズを入力してください。"
+    }
+    if (!data.color) {
+        error.color = "カラーを入力してください。"
+    }
+    if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
+        error.price = "価格を入力してください。"
+    }
+    if (Object.keys(error).length) {
+        error.message = "未入力の項目があります。"
+        res.render("admin/add.ejs", { data, error });
+    } else {
+        await data.save();
+        res.redirect("/admin");
+    }
+
 }
 
 async function deleteProduct(req, res, id) {
@@ -50,7 +73,7 @@ router.get("/", (req, res) => {
 
 router.get("/add", (req, res) => {
     let data = new Product()
-    res.render("admin/add.ejs", { data }); //使用する変数を第２引数としてかく
+    res.render("admin/add.ejs", { data, error: {} }); //使用する変数を第２引数としてかく
 });
 
 router.get("/:id", (req, res) => {
