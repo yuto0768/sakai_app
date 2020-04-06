@@ -14,13 +14,36 @@ async function getProduct(req, res, id) {
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
     let row = await Product.findOne({ where: { id: id } })
         // let row = new Product()
+    let error = {}
+
     row.name = req.body.name;
     row.info = req.body.info;
     row.size = req.body.size;
     row.color = req.body.color;
     row.price = req.body.price;
-    await row.save();
-    res.redirect("/admin");
+
+    if (!row.name) {
+        error.name = "名前を入力してください。"
+    }
+    if (!row.info) {
+        error.info = "情報を入力してください。"
+    }
+    if (!row.size) {
+        error.size = "サイズを入力してください。"
+    }
+    if (!row.color) {
+        error.color = "カラーを入力してください。"
+    }
+    if (!row.price || isNaN(row.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
+        error.price = "価格を入力してください。"
+    }
+    if (Object.keys(error).length) {
+        error.message = "未入力の項目があります。"
+        res.render("admin/edit.ejs", { row, error });
+    } else {
+        await row.save();
+        res.redirect("/admin");
+    }
 }
 
 async function addProduct(req, res) { //formで送られてきた情報はreqに入る
