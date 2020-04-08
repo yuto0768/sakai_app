@@ -8,7 +8,8 @@ async function getProducts(req, res) {
 
 async function getProduct(req, res, id) {
     let row = await Product.findOne({ where: { id: id } })
-    res.render("admin/edit.ejs", { row }); //ejsで使う変数を｛｝の中に書く
+    let error = {}
+    res.render("admin/edit.ejs", { row, error }); //ejsで使う変数を｛｝の中に書く
 }
 
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
