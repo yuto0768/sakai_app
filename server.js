@@ -1,8 +1,10 @@
 var http = require("http");
 var express = require("express");
+var multer = require(' multer ');
+var upload = multer({ dest: ' uploads / ' });
 var app = express();
-var db = require("./data/MyDatabase")
-var { User } = db
+var db = require("./data/MyDatabase");
+var { User } = db;
 
 
 //app.get('/', (req, res) => res.send('Hello World!'))
