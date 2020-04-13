@@ -1,7 +1,5 @@
 var http = require("http");
 var express = require("express");
-var multer = require(' multer ');
-var upload = multer({ dest: ' uploads / ' });
 var app = express();
 var db = require("./data/MyDatabase");
 var { User } = db;
@@ -9,6 +7,7 @@ var { User } = db;
 
 //app.get('/', (req, res) => res.send('Hello World!'))
 app.use("/public", express.static("./public"));
+app.use("/photo/product", express.static("./uploads/product")); //一つ目の引数URLで2つめがファイルのありか
 app.set("view engine", "ejs")
     //フォーム機能を使用するために必要
 app.use(express.json())
