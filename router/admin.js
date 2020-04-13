@@ -53,6 +53,7 @@ async function addProduct(req, res, id) { //formで送られてきた情報はre
     row.size = req.body.size;
     row.color = req.body.color;
     row.price = req.body.price;
+    row.image = req.file.filename;
     await row.save();
     res.redirect("/admin");
 }
@@ -67,7 +68,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/add", (req, res) => {
-    res.render("admin/add.ejs"); //使用する変数を第２引数としてかく
+    res.render("admin/add.ejs", { error: {}, data: {} }); //使用する変数を第２引数としてかく
 });
 
 router.get("/:id", (req, res) => {
@@ -82,7 +83,7 @@ router.post("/:id/update", (req, res) => {
     updateProduct(req, res, req.params.id)
 });
 
-router.post("/add", upload.single('avatar'), (req, res) => {
+router.post("/add", upload.single('photo'), (req, res) => {
     addProduct(req, res)
 });
 
