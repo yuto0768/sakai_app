@@ -1,5 +1,27 @@
 const router = require("express").Router();
+var multer = require('multer');
+const path = require('path');
+const multerStorage = multer.diskStorage({
+    destination(req, file, cb) {
+        cb(null, './uploads/product');
+    },
+    filename(req, file, cb) {
+        const hex = getSecureRandom();
+        const extname = path.extname(file.originalname);
+        cb(null, hex + extname);
+    }
+});
+var upload = multer({ storage: multerStorage });
 var { Product } = require("../data/MyDatabase");
+
+const Crypto = require("crypto");
+
+function getSecureRandom() {
+    const buff = Crypto.randomBytes(8); // バイナリで8byteのランダムな値を生成
+    const hex = buff.toString("hex"); // 16進数の文字列に変換
+
+    return hex; // integerに変換して返却
+}
 
 async function getProducts(req, res) {
     let rows = await Product.findAll()
@@ -60,8 +82,8 @@ router.post("/:id/update", (req, res) => {
     updateProduct(req, res, req.params.id)
 });
 
-router.post("/:id/add", (req, res) => {
-    addProduct(req, res, req.params.id)
+router.post("/add", upload.single('avatar'), (req, res) => {
+    addProduct(req, res)
 });
 
 

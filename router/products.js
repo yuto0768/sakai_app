@@ -1,4 +1,6 @@
 const router = require("express").Router();
+var multer = require('multer');
+var upload = multer({ dest: ' uploads/' });
 const db = require("../data/MyDatabase")
 const { Product, Purchase } = require("../data/MyDatabase")
 
