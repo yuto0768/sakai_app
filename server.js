@@ -9,7 +9,7 @@ var { User } = db;
 app.use("/public", express.static("./public"));
 app.use("/photo/product", express.static("./uploads/product")); //一つ目の引数URLで2つめがファイルのありか
 app.set("view engine", "ejs")
-    //フォーム機能を使用するために必要
+//フォーム機能を使用するために必要
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -39,5 +39,6 @@ app.use("/admin", require("./router/admin"));
 
 app.use("/", require("./router/top_page"));
 
+app.use("/auth", require("./router/firebaseAuth"))
 
 app.listen(80, () => console.log('Example app listening on port 80!'))
