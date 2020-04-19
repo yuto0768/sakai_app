@@ -44,7 +44,7 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
     row.size = req.body.size;
     row.color = req.body.color;
     row.price = req.body.price;
-
+    row.image = req.file.filename;
     if (!row.name) {
         error.name = "名前を入力してください。"
     }
@@ -59,6 +59,9 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
     }
     if (!row.price || isNaN(row.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
         error.price = "価格を入力してください。"
+    }
+    if (ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') {
+        error.image = "写真のみ追加可能です。"
     }
     if (Object.keys(error).length) {
         error.message = "未入力の項目があります。"
@@ -94,6 +97,9 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
     }
     if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
         error.price = "価格を入力してください。"
+    }
+    if (ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') {
+        error.image = "写真のみ追加可能です。"
     }
     if (Object.keys(error).length) {
         error.message = "未入力の項目があります。"
