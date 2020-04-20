@@ -17,9 +17,9 @@
 <div class="container product-list">
     <div class="row">
         <% for(row of rows){ %>
-            <div class="product">
+            <div class="product col-3">
                 <div>
-                    <a href="/products/<%= row.id %>"><img src="/public/images/products_img/<%= row.image %>" alt="写真" width="300" height="300"></a>
+                    <a href="/products/<%= row.id %>"><img src="/photo/product/<%= row.image %>" alt="<%= row.name %>" width="300" height="300"></a>
                 </div>
                 <div class="product-title">
                     <%= row.name %>
@@ -27,72 +27,8 @@
             </div>
             <% } %>
     </div>
-
-    <div class="row">
-        <div class="col">
-            <div>
-                <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            </div>
-            <div class="product-title">
-                商品説明
-            </div>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-        <div class="col">
-            <a href="/products/details"><img src="/public/images/toppage/shoes1.jpg" alt="写真" width="300" height="300"></a>
-            <p>商品説明</p>
-        </div>
-    </div>
 </div>
+
 
 <footer class="footer">
     <div class="container foot-container">

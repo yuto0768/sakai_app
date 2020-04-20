@@ -7,11 +7,15 @@ const multerStorage = multer.diskStorage({
     },
     filename(req, file, cb) {
         const hex = getSecureRandom();
-        const extname = path.extname(file.originalname);
-        cb(null, hex + extname);
+        const ext = path.extname(file.originalname);
+        if (ext != '.jpg' && ext != '.jpeg' && ext != '.png') {
+            cb(new Error('I don\'t have a clue!'))
+        } else {
+            cb(null, hex + ext);
+        }
     }
 });
-var upload = multer({ storage: multerStorage });
+var upload = multer({ storage: multerStorage }).single("photo");
 var { Product } = require("../data/MyDatabase");
 
 const Crypto = require("crypto");
@@ -38,6 +42,7 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
     let row = await Product.findOne({ where: { id: id } })
         // let row = new Product()
     let error = {}
+    let ext = path.extname(req.file.originalname);
 
     row.name = req.body.name;
     row.info = req.body.info;
@@ -77,37 +82,41 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
     let error = {}
         // let row = new Product()
 
-    data.name = req.body.name;
-    data.info = req.body.info;
-    data.size = req.body.size;
-    data.color = req.body.color;
-    data.price = req.body.price;
-    data.image = req.file.filename;
-    if (!data.name) {
-        error.name = "名前を入力してください。"
-    }
-    if (!data.info) {
-        error.info = "情報を入力してください。"
-    }
-    if (!data.size) {
-        error.size = "サイズを入力してください。"
-    }
-    if (!data.color) {
-        error.color = "カラーを入力してください。"
-    }
-    if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
-        error.price = "価格を入力してください。"
-    }
-    if (ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') {
-        error.image = "写真のみ追加可能です。"
-    }
-    if (Object.keys(error).length) {
-        error.message = "未入力の項目があります。"
-        res.render("admin/add.ejs", { data, error });
-    } else {
-        await data.save();
-        res.redirect("/admin");
-    }
+
+    upload(req, res, async(err) => {
+        data.name = req.body.name;
+        data.info = req.body.info;
+        data.size = req.body.size;
+        data.color = req.body.color;
+        data.price = req.body.price;
+        if (!data.name) {
+            error.name = "名前を入力してください。"
+        }
+        if (!data.info) {
+            error.info = "情報を入力してください。"
+        }
+        if (!data.size) {
+            error.size = "サイズを入力してください。"
+        }
+        if (!data.color) {
+            error.color = "カラーを入力してください。"
+        }
+        if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
+            error.price = "価格を入力してください。"
+        }
+
+        if (err) {
+            error.image = "写真のみ追加可能です。"
+        }
+        if (Object.keys(error).length) {
+            error.message = "未入力の項目があります。"
+            res.render("admin/add.ejs", { data, error });
+        } else {
+            data.image = req.file.filename;
+            await data.save();
+            res.redirect("/admin");
+        }
+    });
 }
 
 async function deleteProduct(req, res, id) {
@@ -140,7 +149,7 @@ router.post("/:id/update", (req, res) => {
     updateProduct(req, res, req.params.id)
 });
 
-router.post("/add", upload.single('photo'), (req, res) => {
+router.post("/add", (req, res) => {
     addProduct(req, res)
 });
 

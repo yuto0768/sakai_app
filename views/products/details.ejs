@@ -10,13 +10,15 @@
 </div>
 <hr size="10" width="85%" noshade>
 <div class="container explain">
-    <p>CHUCK TAYLOR（チャックテイラー）は、1917年に誕生し、 ファーストモデルからほぼ不変のデザインとスペックで展開しているCONVERSEを代表するアイコンの一つです。 バスケットボールからファッションへとシーンを広げた現在も、 そのスタイルはALL STAR（オールスター）として世界中で多くの人々に愛され続けています。</p>
+    <p>
+        <%=row.info%>
+    </p>
 </div>
 <form action="/products/<%= product.id %>/purchase">
     <div class="container">
         <div class="row">
             <div class="col">
-                <img src="/public/images/products_img/32060180.jpg" alt="写真" width="350" height="300"></a>
+                <img src="/photo/product/<%=row.image%>" alt="写真" width="350" height="300"></a>
                 <p><input type="checkbox" name="q1" value="white"> WHITE</p>
             </div>
             <div class="col">
@@ -32,30 +34,18 @@
             <div class="col-7">
                 <div class="size h-100">
                     <div class="btn-group-toggle products-option" data-toggle="buttons">
-                        <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="options" value="option1" autocomplete="off" checked> 24.5cm
-                        </label>
-                        <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="options" value="option2" autocomplete="off"> 25.0cm
-                        </label>
-                        <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="options" value="option3" autocomplete="off"> 25.5cm
-                        </label>
-                        <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="options" value="option2" autocomplete="off"> 26.0cm
-                        </label>
-                        <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="options" value="option2" autocomplete="off"> 26.5cm
-                        </label>
-                        <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="options" value="option2" autocomplete="off"> 27.0cm
-                        </label>
+                        <% for(s of row.size.split(",")){ %>
+                            <label class="btn btn-outline-info rounded-pill">
+                            <input type="radio" name="options" value="<%= s %>" autocomplete="off"> <%= s %>
+                            </label>
+                            <% } %>
                     </div>
                 </div>
             </div>
             <div class="col-5">
                 <div class="row price">
-                    <p>￥8800<span>(税込み)</span></p>
+                    <p>￥
+                        <%=row.price%><span>(税込み)</span></p>
                 </div>
                 <hr size="10" width="70%" noshade style="margin:0em 10em auto auto;">
                 <div class="row purchase-btn h-50">

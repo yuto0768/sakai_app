@@ -17,6 +17,7 @@ async function getProduct(req, res, id) {
 
 async function purchaseProduct(req, res) {
     let purchase = await Purchase.create({
+        id: `${req.body.productId}`,
         name: `${req.body.name1}:${req.body.name2}`,
         hurigana: `${req.body.kana1}:${req.body.kana2}`,
         zipcode: req.body.zipcode,
@@ -37,8 +38,9 @@ router.get("/", (req, res) => {
         //     })
 });
 
-router.get("/:id/purchase", (req, res) => {
-    res.render("products/purchase.ejs", { layout: "layout_login.ejs" }); //使用する変数を第２引数としてかく
+router.get("/:id/purchase", async(req, res) => {
+    let product = await Product.findOne({ where: { id: req.params.id } })
+    res.render("products/purchase.ejs", { layout: "layout_login.ejs", product, size: req.query.option, color: req.query.q1 }); //使用する変数を第２引数としてかく
 });
 
 router.post("/:id/purchase", (req, res) => {
