@@ -95,6 +95,7 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
         data.size = req.body.size;
         data.color = req.body.color;
         data.price = req.body.price;
+        data.image = req.body.image;
         if (!data.name) {
             error.name = "名前を入力してください。"
         }
@@ -112,14 +113,13 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
         }
         if (req.file) {
             data.image = req.file.filename
-        } else {
+        } else if(!data.image){
             error.image = "写真を設定してください。"
         }
         if (Object.keys(error).length) {
             error.message = "未入力の項目があります。"
             res.render("admin/add.ejs", { data, error });
         } else {
-            data.image = req.file.filename;
             await data.save();
             res.redirect("/admin");
         }
