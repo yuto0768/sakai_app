@@ -8,14 +8,23 @@ const multerStorage = multer.diskStorage({
     filename(req, file, cb) {
         const hex = getSecureRandom();
         const ext = path.extname(file.originalname);
-        if (ext != '.jpg' && ext != '.jpeg' && ext != '.png') {
-            cb(new Error('I don\'t have a clue!'))
-        } else {
-            cb(null, hex + ext);
-        }
+        cb(null, hex + ext);
     }
 });
-var upload = multer({ storage: multerStorage }).single("photo");
+
+const fileFilter = function (req, file, cb) {
+    const allowExt = [".jpg", ".jpeg", ".png"]
+    const ext = path.extname(file.originalname);
+    //if (ext != '.jpg' && ext != '.jpeg' && ext != '.png') {
+    if (allowExt.includes(ext)) {
+        cb(null, true)
+    } else {
+        //エラーの時、req.body.fileはundefinedになる
+        cb(null, false)
+    }
+}
+
+var upload = multer({ storage: multerStorage, fileFilter }).single("photo");
 var { Product } = require("../data/MyDatabase");
 
 const Crypto = require("crypto");
@@ -39,51 +48,48 @@ async function getProduct(req, res, id) {
 }
 
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
-    let row = await Product.findOne({ where: { id: id } })
-        // let row = new Product()
-    let error = {}
-    let ext = path.extname(req.file.originalname);
-
-    row.name = req.body.name;
-    row.info = req.body.info;
-    row.size = req.body.size;
-    row.color = req.body.color;
-    row.price = req.body.price;
-    row.image = req.file.filename;
-    if (!row.name) {
-        error.name = "名前を入力してください。"
-    }
-    if (!row.info) {
-        error.info = "情報を入力してください。"
-    }
-    if (!row.size) {
-        error.size = "サイズを入力してください。"
-    }
-    if (!row.color) {
-        error.color = "カラーを入力してください。"
-    }
-    if (!row.price || isNaN(row.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
-        error.price = "価格を入力してください。"
-    }
-    if (ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') {
-        error.image = "写真のみ追加可能です。"
-    }
-    if (Object.keys(error).length) {
-        error.message = "未入力の項目があります。"
-        res.render("admin/edit.ejs", { row, error });
-    } else {
-        await row.save();
-        res.redirect("/admin");
-    }
+    upload(req, res, async (err) => {
+        let row = await Product.findOne({ where: { id: id } })
+        row.name = req.body.name;
+        row.info = req.body.info;
+        row.size = req.body.size;
+        row.color = req.body.color;
+        row.price = req.body.price;
+        row.image = req.file.filename;
+        if (!row.name) {
+            error.name = "名前を入力してください。"
+        }
+        if (!row.info) {
+            error.info = "情報を入力してください。"
+        }
+        if (!row.size) {
+            error.size = "サイズを入力してください。"
+        }
+        if (!row.color) {
+            error.color = "カラーを入力してください。"
+        }
+        if (!row.price || isNaN(row.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
+            error.price = "価格を入力してください。"
+        }
+        if (req.file) {
+            data.image = req.file.filename
+        } else {
+            error.image = "写真を設定してください。"
+        }
+        if (Object.keys(error).length) {
+            error.message = "未入力の項目があります。"
+            res.render("admin/edit.ejs", { row, error });
+        } else {
+            await row.save();
+            res.redirect("/admin");
+        }
+    })
 }
 
 async function addProduct(req, res) { //formで送られてきた情報はreqに入る
-    let data = new Product()
-    let error = {}
-        // let row = new Product()
-
-
-    upload(req, res, async(err) => {
+    upload(req, res, async (err) => {
+        let data = new Product()
+        let error = {}
         data.name = req.body.name;
         data.info = req.body.info;
         data.size = req.body.size;
@@ -104,9 +110,10 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
         if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
             error.price = "価格を入力してください。"
         }
-
-        if (err) {
-            error.image = "写真のみ追加可能です。"
+        if (req.file) {
+            data.image = req.file.filename
+        } else {
+            error.image = "写真を設定してください。"
         }
         if (Object.keys(error).length) {
             error.message = "未入力の項目があります。"
