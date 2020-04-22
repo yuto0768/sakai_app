@@ -15,10 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-app.get("/touroku", (req, res) => {
-    res.render("touroku_page.ejs"); //使用する変数を第２引数としてかく
-});
-
 async function showUser(req, res, id) { //*await必須　await使用時はasync必須
     let user = await User.findOne({ id: id }); //serectをして一致したものを変数に格納
     console.log(user.name);
@@ -38,6 +34,8 @@ app.use("/products", require("./router/products"));
 app.use("/admin", require("./router/admin"));
 
 app.use("/", require("./router/top_page"));
+
+app.use("/touroku", require("./router/register"));
 
 
 app.listen(80, () => console.log('Example app listening on port 80!'));

@@ -24,15 +24,18 @@
             </div>
             <div id="form-main" class="row">
                 <div id="form-div" class="form-div">
-                    <form class="form" style="width: w-100;">
+                    <form action="/top_page" method="post" class="form" style="width: w-100;">
                         <p class="name">
-                            <input class="form-control form-control-lg login-form" name="name" type="text" placeholder="Name" />
+                            <input type="text" name="user_name" class="form-control form-control-lg login-form　<%= error.name ? 'is-invalid': '' %>" placeholder="Name" />
+                            <%- error.name ? `<div class="invalid-feedback">${error.name}</div>` : `` %>
                         </p>
                         <p class="email">
-                            <input class="form-control form-control-lg login-form" name="email" type="text" placeholder="Email" />
+                            <input name="email" type="text" class="form-control form-control-lg login-form <%=error.mail ? 'is-invalid': '' %>" placeholder="Email" />
+                            <%- error.mail ? `<div class="invalid-feedback">${error.mail}</div>` : `` %>
                         </p>
                         <p class="password">
-                            <input class="form-control form-control-lg login-form" name="password" type="password" placeholder="password" />
+                            <input type="password" name="password" class="form-control form-control-lg login-form <%=error.password ? 'is-invalid': '' %>" placeholder="password" />
+                            <%- error.password ? `<div class="invalid-feedback">${error.password}</div>` : `` %>
                         </p>
                         <p class="submit" style="margin-top:1em">
                             <input class="btn btn-primary form-control login-form" type="submit" value="登録" id="button-blue" />

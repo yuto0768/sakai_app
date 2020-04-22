@@ -12,7 +12,7 @@ const multerStorage = multer.diskStorage({
     }
 });
 
-const fileFilter = function (req, file, cb) {
+const fileFilter = function(req, file, cb) {
     const allowExt = [".jpg", ".jpeg", ".png"]
     const ext = path.extname(file.originalname);
     //if (ext != '.jpg' && ext != '.jpeg' && ext != '.png') {
@@ -48,7 +48,7 @@ async function getProduct(req, res, id) {
 }
 
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
-    upload(req, res, async (err) => {
+    upload(req, res, async(err) => {
         let row = await Product.findOne({ where: { id: id } })
         row.name = req.body.name;
         row.info = req.body.info;
@@ -87,7 +87,7 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
 }
 
 async function addProduct(req, res) { //formで送られてきた情報はreqに入る
-    upload(req, res, async (err) => {
+    upload(req, res, async(err) => {
         let data = new Product()
         let error = {}
         data.name = req.body.name;
@@ -113,7 +113,7 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
         }
         if (req.file) {
             data.image = req.file.filename
-        } else if(!data.image){
+        } else if (!data.image) {
             error.image = "写真を設定してください。"
         }
         if (Object.keys(error).length) {
