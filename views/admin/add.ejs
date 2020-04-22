@@ -1,3 +1,8 @@
+<style>
+    .product-image{
+        width: 320px;
+    }
+</style>
 <h1>追加画面です</h1>
 <div class="container">
     <% if(error.message) { %>
@@ -8,12 +13,28 @@
         </div>
         <% } %>
             <div class="row">
-                <form action="./add" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="photo" />
+                <form action="./add" method="POST" enctype="multipart/form-data" class="w-100">
                     <dl>
+                        <% if(data.image) {%>
+                            <dt>商品画像</dt>
+                            <dd class="input-group">
+                                <img src="/photo/product/<%= data.image %>" class="product-image d-block">
+                                <input type="hidden" name="image" value="<%= data.image %>">
+                            </dd>
+                            <dt>商品画像（変更）</dt>
+                            <dd class="input-group">
+                                <input type="file" name="photo"  class="form-control <%= error.image ? 'is-invalid' : ''%>"/>
+                                <%- error.image ? `<div class="invalid-feedback">${error.image}</div>` : `` %>
+                            </dd>  
+                        <% } else { %>
+                            <dt>商品画像</dt>
+                            <dd class="input-group">
+                                <input type="file" name="photo"  class="form-control <%= error.image ? 'is-invalid' : ''%>"/>
+                                <%- error.image ? `<div class="invalid-feedback">${error.image}</div>` : `` %>
+                            </dd>  
+                        <% }%>
                         <dt>商品名</dt>
                         <dd class="input-group">
-
                             <input type="text" value="<%=data.name%>" name="name" class="form-control <%= error.name ? 'is-invalid' : ''%>">
                             <%- error.name ? `<div class="invalid-feedback">${error.name}</div>` : `` %>
                         </dd>
