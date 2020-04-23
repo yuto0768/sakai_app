@@ -1,8 +1,10 @@
 const router = require("express").Router();
 
+var { User } = require("../data/MyDatabase");
+
 async function addmember(req, res) { //formで送られてきた情報はreqに入る
     upload(req, res, async(err) => {
-        let data = new Product()
+        let data = new User()
         let error = {}
         data.name = req.body.name;
         data.mail = req.body.mail;
@@ -27,7 +29,7 @@ async function addmember(req, res) { //formで送られてきた情報はreqに�
 }
 
 router.get("/touroku", (req, res) => {
-    let data = new Product()
+    let data = new User()
     res.render("touroku_page.ejs", { data, error: {} }); //使用する変数を第２引数としてかく
 });
 
