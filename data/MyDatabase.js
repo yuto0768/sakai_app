@@ -37,7 +37,7 @@ const User = sequelize.define('user', {
     },
     idType: {
         type: Sequelize.INTEGER(1),
-        allowNull: false,
+        allowNull: true,
     },
     uid: {
         type: Sequelize.STRING,

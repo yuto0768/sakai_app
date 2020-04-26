@@ -24,13 +24,13 @@
             </div>
             <div id="form-main" class="row">
                 <div id="form-div" class="form-div">
-                    <form action="/top_page" method="post" class="form" style="width: w-100;">
+                    <form action="touroku" method="post" class="form" style="width: w-100;">
                         <p class="name">
-                            <input type="text" name="user_name" class="form-control form-control-lg login-form　<%= error.name ? 'is-invalid': '' %>" placeholder="Name" />
+                            <input type="text" name="name" class="form-control form-control-lg login-form　<%= error.name ? 'is-invalid': '' %>" placeholder="Name" />
                             <%- error.name ? `<div class="invalid-feedback">${error.name}</div>` : `` %>
                         </p>
                         <p class="email">
-                            <input name="email" type="text" class="form-control form-control-lg login-form <%=error.mail ? 'is-invalid': '' %>" placeholder="Email" />
+                            <input name="mail" type="text" class="form-control form-control-lg login-form <%=error.mail ? 'is-invalid': '' %>" placeholder="Email" />
                             <%- error.mail ? `<div class="invalid-feedback">${error.mail}</div>` : `` %>
                         </p>
                         <p class="password">
