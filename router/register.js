@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 var { User } = require("../data/MyDatabase");
+
 async function addmember(req, res) { //formで送られてきた情報はreqに入る
     let data = new User()
     let error = {}
@@ -21,6 +22,7 @@ async function addmember(req, res) { //formで送られてきた情報はreqに�
         res.render("touroku_page.ejs", { data, error });
     } else {
         await data.save();
+        req.session.user = data;
         res.redirect("/");
     }
 }

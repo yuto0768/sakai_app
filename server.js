@@ -3,7 +3,15 @@ var express = require("express");
 var app = express();
 var db = require("./data/MyDatabase");
 var { User } = db;
+var session = require('express-session')
 
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}))
 
 //app.get('/', (req, res) => res.send('Hello World!'))
 app.use("/public", express.static("./public"));
