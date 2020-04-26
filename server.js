@@ -21,29 +21,32 @@ app.set("view engine", "ejs")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+app.use(require("express-ejs-layouts"))
+app.use(function(req, res, next) {
+    if (req.session.user) {
+        res.locals.user = req.session.user
+    } else {
+        res.locals.user = null
+    }
+    next()
+})
 
-
-async function showUser(req, res, id) { //*await必須　await使用時はasync必須
-    let user = await User.findOne({ id: id }); //serectをして一致したものを変数に格納
-    console.log(user.name);
-    res.render("login_page.ejs"); //使用する変数を第２引数としてかく
+const login = function(req, res, next) {
+    if (!req.session.user && req.originalUrl != "/" && req.originalUrl != "/login") {
+        res.redirect("/login")
+        next("route")
+    } else {
+        next()
+    }
 }
 
+app.use("/products", login, require("./router/products"));
 
-app.get("/login", (req, res) => {
-    //res.render("login_page.ejs"); //使用する変数を第２引数としてかく
-    showUser(req, res, 1);
-});
-
-app.use(require("express-ejs-layouts"))
-
-app.use("/products", require("./router/products"));
-
-app.use("/admin", require("./router/admin"));
+app.use("/admin", login, require("./router/admin"));
 
 app.use("/", require("./router/top_page"));
 
 app.use("/touroku", require("./router/register"));
 
-
+app.use("/login", require("./router/login"));
 app.listen(80, () => console.log('Example app listening on port 80!'));

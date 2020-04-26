@@ -1,57 +1,37 @@
 body {
     margin: 0;
     font-family: "Hiragino Kaku Gothic ProN";
-  }
-
-.top-page {
-    color : yellow
-  } 
-
-header {
-    height: 65px;
-    width: 100%;
-    background-color: rgba(34, 49, 52, 0.9);
-    position : fixed;
-    top :0;
-    z-index : 10;
-     }
-
- .header-center {
-    text-align:center;
-    padding:0px;
-    font-size:300%;
-    font-family:cursive;
-    color:white
-     }
-    
- html {
     background-size: cover;
     background-repeat: no-repeat;
-    background-image:url(/public/images/login_touroku/loginback.jpg);
-  }
+    background-image: url(/public/images/login_touroku/loginback.jpg);
+}
+
+.top-page {
+    color: yellow
+}
 
 .form {
     text-align: center;
     width: 500px;
     height: 200px;
-    margin-top:2em;
+    margin-top: 2em;
 }
 
 .submit:hover {
-	color: #3498db;
+    color: #3498db;
 }
 
-.form-div{
+.form-div {
     max-width: 30em;
     margin: 0 auto 0 auto;
 }
 
-.form-div p{
+.form-div p {
     width: 100%;
     margin-bottom: 0;
 }
 
-.form-div input{
+.form-div input {
     width: 100%;
 }
 
@@ -64,23 +44,26 @@ h1 {
     font-family: cursive;
     color: brown;
     font-weight: bold;
-  }
-  h1::before,
-  h1::after {
+}
+
+h1::before,
+h1::after {
     position: absolute;
     left: 0;
     content: '';
     width: 100%;
     height: 6px;
     box-sizing: border-box;
-  }
-  h1::before {
+}
+
+h1::before {
     top: 0;
     border-top: 2px solid #ccc;
     border-bottom: 1px solid #ccc;
-  }
-  h1::after {
+}
+
+h1::after {
     bottom: 0;
     border-top: 1px solid #ccc;
     border-bottom: 2px solid #ccc;
-  }
+}

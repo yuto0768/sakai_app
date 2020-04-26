@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/public/stylesheet/loginstyle.css">
+
+<div class="header-center">
+    <a href="/" class="top-page">Fashion market</a>
+</div>
+<div class="main container">
+    <div class="main-text">
+        <h1>Welcome　Back</h1>
+        <h1>Fashion Market</h1>
+    </div>
+    <div id="form-main" class="row">
+        <div id="form-div" class="form-div">
+            <% if(error) {%>
+                <div class="alert alert-danger">
+                    <%=error.message %>
+                </div>
+                <% } %>
+                    <form action="login" method="POST" class="form" style="width: w-100;">
+                        <p class="email">
+                            <input class="form-control form-control-lg login-form" name="mail" type="text" placeholder="Email" />
+                        </p>
+                        <p class="password">
+                            <input class="form-control form-control-lg login-form" name="password" type="password" placeholder="password" />
+                        </p>
+                        <p class="submit" style="margin-top:1em">
+                            <input class="btn btn-primary form-control login-form" type="submit" value="ログイン" id="button-blue" />
+                        </p>
+                    </form>
+        </div>
+    </div>
+</div>

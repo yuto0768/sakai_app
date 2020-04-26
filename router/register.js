@@ -36,4 +36,5 @@ router.post("/touroku", (req, res) => {
     addmember(req, res)
 });
 
+
 module.exports = router;
