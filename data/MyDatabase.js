@@ -137,6 +137,9 @@ const Purchase = sequelize.define('purchase', {
     timestamps: true　 //行作成日時更新日時自動追加
 });
 
+Purchase.belongsTo(User)
+User.hasMay(Purchase)
+
 async function setup() {　　 //force:trueでデータ全削除
     await sequelize.sync({ force: true }) //await:promiseの短縮(then実行で次へ)
         // テスト用のユーザーを1件登録

@@ -17,6 +17,7 @@ async function getProduct(req, res, id) {
 
 async function purchaseProduct(req, res) {
     let purchase = await Purchase.create({
+        userId: `${req.session.user.id}`,
         id: `${req.body.productId}`,
         size: `${req.body.size}`,
         color: `${req.body.color}`,
