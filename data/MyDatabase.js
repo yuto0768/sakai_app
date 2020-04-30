@@ -138,7 +138,7 @@ const Purchase = sequelize.define('purchase', {
 });
 
 //PurchaseとProductを1:n(purchase:product)で関連付ける
-//これにより、productテーブルにpurchaseId列が追加されます
+//これにより、productテーブルにUserId列が追加されます
 //PurchaseはUserに所属する（Userは複数のPurchaseを保持できる）という意味です
 Purchase.belongsTo(User);
 //Userは複数のPurchaseを保持するという意味です。上記とセットになります

@@ -5,24 +5,14 @@
         <th>顧客名</th>
         <th>商品名</th>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-    </tr>
+    <%for(p of rows){%>
+        <tr>
+            <td>
+                <%=p.user.name%>
+            </td>
+            <td>
+                <%=p.product.name%>
+            </td>
+        </tr>
+        <%}%>
 </table>

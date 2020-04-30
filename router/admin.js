@@ -25,7 +25,7 @@ const fileFilter = function(req, file, cb) {
 }
 
 var upload = multer({ storage: multerStorage, fileFilter }).single("photo");
-var { Product } = require("../data/MyDatabase");
+var { Product, Purchase, User } = require("../data/MyDatabase");
 
 const Crypto = require("crypto");
 
@@ -144,8 +144,14 @@ router.get("/add", (req, res) => {
     res.render("admin/add.ejs", { data, error: {} }); //使用する変数を第２引数としてかく
 });
 
-router.get("/history", (req, res) => {
-    res.render("admin/history.ejs")
+router.get("/history", async(req, res) => {
+    let rows = await Purchase.findAll({
+        include: [
+            { model: User, required: true },
+            { model: Product, required: true }
+        ]
+    })
+    res.render("admin/history.ejs", { rows })
 });
 
 router.get("/:id", (req, res) => {
