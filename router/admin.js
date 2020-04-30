@@ -144,6 +144,10 @@ router.get("/add", (req, res) => {
     res.render("admin/add.ejs", { data, error: {} }); //使用する変数を第２引数としてかく
 });
 
+router.get("/history", (req, res) => {
+    res.render("admin/history.ejs")
+});
+
 router.get("/:id", (req, res) => {
     getProduct(req, res, req.params.id)
 });
@@ -159,6 +163,7 @@ router.post("/:id/update", (req, res) => {
 router.post("/add", (req, res) => {
     addProduct(req, res)
 });
+
 
 
 module.exports = router;
