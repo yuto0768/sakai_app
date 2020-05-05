@@ -43,6 +43,24 @@ header {
     color: white
 }
 
+.header-left {
+    position: absolute;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: all 0.5s;
+}
+
+.header-left:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.header-left a {
+    line-height: 65px;
+    padding: 0 25px;
+    color: white;
+    display: block;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
