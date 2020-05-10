@@ -2,16 +2,20 @@
 <h1>購入履歴</h1>
 <table>
     <tr>
-        <th>顧客名</th>
+        <th>購入日</th>
         <th>商品名</th>
+        <th>金額</th>
     </tr>
     <%for(p of rows){%>
         <tr>
             <td>
-                <%=p.user.name%>
+                <%=format('yy/MM/dd  hh:mm', p.createdAt)%>
             </td>
             <td>
                 <%=p.product.name%>
+            </td>
+            <td>
+                <%=p.product.price%>
             </td>
         </tr>
         <%}%>

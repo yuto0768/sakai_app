@@ -4,6 +4,7 @@
   "description": "ポートフォリオ用レポジトリ",
   "main": "server.js",
   "dependencies": {
+    "date-format": "^3.0.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
