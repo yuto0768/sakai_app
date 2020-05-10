@@ -137,6 +137,12 @@ const Purchase = sequelize.define('purchase', {
     timestamps: true　 //行作成日時更新日時自動追加
 });
 
+const Cart = sequelize.define('cart', {
+
+}, {
+    timestamps: false
+});
+
 //PurchaseとProductを1:n(purchase:product)で関連付ける
 //これにより、productテーブルにUserId列が追加されます
 //PurchaseはUserに所属する（Userは複数のPurchaseを保持できる）という意味です
@@ -148,19 +154,31 @@ User.hasMany(Purchase);
 //これにより、PurchaseテーブルにproductId列が追加されます
 //1件の購入履歴に複数の製品を関連付ける場合は、n:nの関連付けにします。
 //n:n関連付けについては、1:1関連付けでの購入履歴ができてから、説明します。
-Purchase.belongsTo(Product)
-Product.hasMany(Purchase)
+Purchase.belongsTo(Product);
+Product.hasMany(Purchase);
+
+User.belongsToMany(Product, { through: Cart, as: "carts" })
+Product.belongsToMany(User, { through: Cart })
 
 async function setup() {　　 //force:trueでデータ全削除
     await sequelize.sync({ force: true }) //await:promiseの短縮(then実行で次へ)
         // テスト用のユーザーを1件登録
     let tanaka = await User.create({ name: "tanaka", idType: IdType.Mail, password: "pass" })
     let converse = await Product.create({ name: "Converse", color: "RED,WHITE,BLACK", size: "24.5cm,25.0cm,25.5cm,26.0cm,26.5cm,27.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
-    await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    let converse1 = await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse2", color: "BLACK", size: "25.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse3", color: "BLACK", size: "26.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse4", color: "BLACK", size: "26.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse5", color: "BLACK", size: "27.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+
+
+
+    await tanaka.addCart(converse)
+    await tanaka.addCart(converse1)
+    let cart = await tanaka.getCarts()
+        //sample display cart list
+    cart.forEach(c => console.log(`cart:${c.name}`))
+
 
     //関連付けのサンプルコード
     //田中さんがConverseを買ったというデータになります
@@ -180,8 +198,8 @@ async function setup() {　　 //force:trueでデータ全削除
     }
 }
 
-test()
-setup()
+test();
+setup();
 
 module.exports = {
     User,

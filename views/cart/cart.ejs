@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/public/stylesheet/history.css">
+<h1>カート</h1>
+<table>
+    <tr>
+        <th>商品名</th>
+        <th>金額</th>
+    </tr>
+    <%for(p of rows){%>
+        <tr>
+            <td>
+                <%=p.product.name%>
+            </td>
+            <td>
+                <%=p.product.price%>
+            </td>
+        </tr>
+        <%}%>
+</table>

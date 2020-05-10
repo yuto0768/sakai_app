@@ -51,4 +51,6 @@ app.use("/touroku", require("./router/register"));
 app.use("/user_history", login, require("./router/user"));
 
 app.use("/login", require("./router/login"));
+
+app.use("/cart", require("./router/cart"));
 app.listen(80, () => console.log('Example app listening on port 80!'));
