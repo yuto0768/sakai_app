@@ -6,7 +6,10 @@ router.get("/", async(req, res) => {
         include: [
             { model: User, required: true },
             { model: Product, required: true }
-        ]
+        ],
+        where: {
+            userId: req.session.user.id
+        }
     })
     res.render("user_history.ejs", { rows })
 });
