@@ -147,6 +147,16 @@ const Cart = sequelize.define('cart', {
     timestamps: false
 });
 
+const PurchaseProduct = sequelize.define('purchaseproduct', {
+    count: {
+        type: Sequelize.STRING,
+        defaultValue: 1,
+    }
+
+}, {
+    timestamps: false
+});
+
 //PurchaseとProductを1:n(purchase:product)で関連付ける
 //これにより、productテーブルにUserId列が追加されます
 //PurchaseはUserに所属する（Userは複数のPurchaseを保持できる）という意味です
@@ -158,8 +168,7 @@ User.hasMany(Purchase);
 //これにより、PurchaseテーブルにproductId列が追加されます
 //1件の購入履歴に複数の製品を関連付ける場合は、n:nの関連付けにします。
 //n:n関連付けについては、1:1関連付けでの購入履歴ができてから、説明します。
-Purchase.belongsTo(Product);
-Product.hasMany(Purchase);
+Purchase.belongsToMany(Product, { through: PurchaseProduct });
 Cart.belongsTo(User);
 Cart.belongsTo(Product);
 
@@ -211,5 +220,7 @@ module.exports = {
     User,
     Product,
     Purchase,
-    Cart
+    Cart,
+    PurchaseProduct,
+    sequelize
 }
