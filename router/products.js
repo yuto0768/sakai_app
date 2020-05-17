@@ -2,7 +2,7 @@ const router = require("express").Router();
 var multer = require('multer');
 var upload = multer({ dest: ' uploads/' });
 const db = require("../data/MyDatabase")
-const { Product, Purchase } = require("../data/MyDatabase")
+const { Product, Purchase, User, Cart } = require("../data/MyDatabase")
 
 
 async function getProducts(req, res) {
@@ -42,8 +42,11 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id/purchase", async(req, res) => {
-    let product = await Product.findOne({ where: { id: req.params.id } })
-    res.render("products/purchase.ejs", { layout: "layout_login.ejs", product, size: req.query.option, color: req.query.q1 }); //使用する変数を第２引数としてかく
+    // let user = await User.findOne({ where: { id: req.session.user.id } })
+    // let product = await Product.findOne({ where: { id: req.params.id } })
+    // await user.addCart(product)
+    await Cart.create({ userId: req.session.user.id, productId: req.params.id }) //45~47行目と同じ内容
+    res.redirect("/cart/");
 });
 
 router.post("/:id/purchase", (req, res) => {

@@ -13,6 +13,7 @@ async function productCart(req, res) {
 }
 
 
+
 router.get("/", paginate.middleware(1, 50), async(req, res) => {
     let rows = await Cart.findAll({
         include: [
@@ -24,6 +25,11 @@ router.get("/", paginate.middleware(1, 50), async(req, res) => {
         },
     })
     res.render("cart/cart.ejs", { rows, format, paginate })
+});
+
+router.get("/:id/delete", async(req, res) => {
+    await Cart.destroy({ where: { userId: req.session.user.id, productId: req.params.id } })
+    res.redirect("/cart/");
 });
 
 router.post("/delete", (req, res) => {
