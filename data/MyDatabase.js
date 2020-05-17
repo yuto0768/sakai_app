@@ -138,6 +138,10 @@ const Purchase = sequelize.define('purchase', {
 });
 
 const Cart = sequelize.define('cart', {
+    count: {
+        type: Sequelize.STRING,
+        defaultValue: 1,
+    }
 
 }, {
     timestamps: false
@@ -156,6 +160,8 @@ User.hasMany(Purchase);
 //n:n関連付けについては、1:1関連付けでの購入履歴ができてから、説明します。
 Purchase.belongsTo(Product);
 Product.hasMany(Purchase);
+Cart.belongsTo(User);
+Cart.belongsTo(Product);
 
 User.belongsToMany(Product, { through: Cart, as: "carts" })
 Product.belongsToMany(User, { through: Cart })
@@ -163,7 +169,7 @@ Product.belongsToMany(User, { through: Cart })
 async function setup() {　　 //force:trueでデータ全削除
     await sequelize.sync({ force: true }) //await:promiseの短縮(then実行で次へ)
         // テスト用のユーザーを1件登録
-    let tanaka = await User.create({ name: "tanaka", idType: IdType.Mail, password: "pass" })
+    let tanaka = await User.create({ name: "tanaka", idType: IdType.Mail, mail: "abc@gmail.com", password: "pass" })
     let converse = await Product.create({ name: "Converse", color: "RED,WHITE,BLACK", size: "24.5cm,25.0cm,25.5cm,26.0cm,26.5cm,27.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     let converse1 = await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse2", color: "BLACK", size: "25.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
@@ -174,10 +180,10 @@ async function setup() {　　 //force:trueでデータ全削除
 
 
     await tanaka.addCart(converse)
-    await tanaka.addCart(converse1)
+    await tanaka.addCart(converse1, { through: { count: 10 } })
     let cart = await tanaka.getCarts()
-        //sample display cart list
-    cart.forEach(c => console.log(`cart:${c.name}`))
+        //sample display cart lis
+    cart.forEach(c => console.log(`cart:${c.name}, count:${c.cart.count}`))
 
 
     //関連付けのサンプルコード
@@ -204,5 +210,6 @@ setup();
 module.exports = {
     User,
     Product,
-    Purchase
+    Purchase,
+    Cart
 }
