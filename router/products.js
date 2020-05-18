@@ -30,7 +30,7 @@ router.get("/:id/purchase", async(req, res) => {
     // let user = await User.findOne({ where: { id: req.session.user.id } })
     // let product = await Product.findOne({ where: { id: req.params.id } })
     // await user.addCart(product)
-    await Cart.create({ userId: req.session.user.id, productId: req.params.id }) //45~47行目と同じ内容
+    await Cart.create({ userId: req.session.user.id, productId: req.params.id }) //30~32行目と同じ内容
     res.redirect("/cart/");
 });
 

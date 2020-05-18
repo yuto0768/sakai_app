@@ -4,6 +4,7 @@
     <tr>
         <th>商品名</th>
         <th>金額</th>
+        <th>数量</th>
     </tr>
     <%for(p of rows){%>
         <tr>
@@ -13,6 +14,9 @@
             </td>
             <td>
                 <%=p.product.price%>
+            </td>
+            <td>
+                <%=c.count%>
             </td>
         </tr>
         <%}%>
