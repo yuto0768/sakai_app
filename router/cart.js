@@ -8,8 +8,7 @@ router.get("/", paginate.middleware(1, 50), async(req, res) => {
     let rows = await Cart.findAll({
         include: [
             { model: User, required: true },
-            { model: Product, required: true },
-            { model: PurchaseProduct, required: true }
+            { model: Product, required: true }
         ],
         where: {
             userId: req.session.user.id
