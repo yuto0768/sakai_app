@@ -30,9 +30,18 @@ router.post("/delete", (req, res) => {
     res.redirect("cart/cart.ejs");
 });
 
-router.get("/inputinfo", (req, res) => {
+router.get("/inputinfo", async(req, res) => {
+    let rows = await Cart.findAll({
+        include: [
+            { model: User, required: true },
+            { model: Product, required: true }
+        ],
+        where: {
+            userId: req.session.user.id
+        },
+    })
 
-    res.render("cart/inputinfo.ejs");
+    res.render("cart/inputinfo.ejs", { rows, format, paginate });
 });
 
 

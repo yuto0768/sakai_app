@@ -3,50 +3,61 @@
     <div class="container confirm">
         <p>ご注文内容</p>
         <hr size="5" color="blue">
-        <div class="row information">
-            <div class="col-6">
-                <div class="products-info">
-
-                </div>
-                <div class="col-6 chuck-taylor">
-
-                </div>
-            </div>
+        <div class="order-table">
+            <table>
+                <tr>
+                    <th>商品名</th>
+                    <th>金額</th>
+                    <th>数量</th>
+                </tr>
+                <%for(p of rows){%>
+                    <tr>
+                        <td>
+                            <%=p.product.name%>
+                        </td>
+                        <td>
+                            <%=p.product.price%>
+                        </td>
+                        <td>
+                            <%= p.count%>
+                        </td>
+                    </tr>
+                    <%}%>
+            </table>
         </div>
-    </div>
-    <div class="container private-info">
-        <form class="form-horizontal" action="purchase" method="POST">
-            <fieldset>
-                <legend>ご注文様</legend>
-                <hr size="5" color="blue">
-                <div class="row form-group">
-                    <label for="name">お名前</label>
-                    <div class="col">
-                        <input type="text" name="name1" id="name1" class="form-control" placeholder="姓">
+        <div class="container private-info">
+            <form class="form-horizontal" action="purchase" method="POST">
+                <fieldset>
+                    <legend>ご注文様</legend>
+                    <hr size="5" color="blue">
+                    <div class="row form-group">
+                        <label for="name">お名前</label>
+                        <div class="col">
+                            <input type="text" name="name1" id="name1" class="form-control" placeholder="姓">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="name2" id="name2" class="form-control" placeholder="名">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input type="text" name="name2" id="name2" class="form-control" placeholder="名">
+                    <div class="row form-group">
+                        <label for="kana">お名前（フリガナ）</label>
+                        <div class="col">
+                            <input type="text" name="kana1" id="kana1" class="form-control" placeholder="セイ">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="kana2" id="kana2" class="form-control" placeholder="メイ">
+                        </div>
                     </div>
-                </div>
-                <div class="row form-group">
-                    <label for="kana">お名前（フリガナ）</label>
-                    <div class="col">
-                        <input type="text" name="kana1" id="kana1" class="form-control" placeholder="セイ">
+                    <div class="form-group">
+                        <label for="zipcode">郵便番号</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">〒</span>
+                            <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="000-0000">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input type="text" name="kana2" id="kana2" class="form-control" placeholder="メイ">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="zipcode">郵便番号</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">〒</span>
-                        <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="000-0000">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="pref">住所</label>
-                    <select name="pref" id="pref" class="form-control">   
+                    <div class="form-group">
+                        <label for="pref">住所</label>
+                        <select name="pref" id="pref" class="form-control">   
                     <option value="北海道">北海道</option>       
                     <option value="青森県">青森県</option>        
                     <option value="岩手県">岩手県</option>       
@@ -95,42 +106,40 @@
                     <option value="鹿児島県">鹿児島県</option>        
                     <option value="沖縄県">沖縄県</option>       
                   </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="addr1" id="addr1" class="form-control" placeholder="市区町村名">
-                    <p class="help-block">住所は2つに分けてご記入ください。</p>
-                    <input type="text" name="addr2" id="addr2" class="form-control" placeholder="番地・ビル名">
-                    <p class="help-block">マンション名は必ず記入してください。</p>
-                </div>
-                <div class="form-group"></div>
-                <label for="tel">電話番号</label>
-                <div class="input-group">
-                    <input type="tel" name="tel1" id="tel1" class="form-control" placeholder="080">
-                    <span class="input-group-addon">-</span>
-                    <input type="tel" name="tel2" id="tel2" class="form-control" placeholder="0000">
-                    <span class="input-group-addon">-</span>
-                    <input type="tel" name="tel3" id="tel3" class="form-control" placeholder="0000">
-                </div>
-                <div class="form-group">
-                    <label for="email">メールアドレス</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="メールアドレスを入力してください">
-                </div>
-                <div class="row">
-                    <p>代金引換</p>
-                    <div class="form-check">
-                        <input type="radio" name="payment" id="cash" value="cash">
-                        <label for="cash"></label>
                     </div>
-                    <p>クレジットカード</p>
-                    <div class="form-check">
-                        <input type="radio" name="payment" id="credit" value="credit">
-                        <label for="credit"></label>
+                    <div class="form-group">
+                        <input type="text" name="addr1" id="addr1" class="form-control" placeholder="市区町村名">
+                        <input type="text" name="addr2" id="addr2" class="form-control" placeholder="番地・ビル名">
                     </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-lg">　確　認　</button>
-                </div>
+                    <div class="form-group"></div>
+                    <label for="tel">電話番号</label>
+                    <div class="input-group">
+                        <input type="tel" name="tel1" id="tel1" class="form-control" placeholder="080">
+                        <span class="input-group-addon">-</span>
+                        <input type="tel" name="tel2" id="tel2" class="form-control" placeholder="0000">
+                        <span class="input-group-addon">-</span>
+                        <input type="tel" name="tel3" id="tel3" class="form-control" placeholder="0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="メールアドレスを入力してください">
+                    </div>
+                    <div class="row">
+                        <p>代金引換</p>
+                        <div class="form-check">
+                            <input type="radio" name="payment" id="cash" value="cash">
+                            <label for="cash"></label>
+                        </div>
+                        <p>クレジットカード</p>
+                        <div class="form-check">
+                            <input type="radio" name="payment" id="credit" value="credit">
+                            <label for="credit"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg">　確　認　</button>
+                    </div>
+        </div>
+        </fieldset>
+        </form>
     </div>
-    </fieldset>
-    </form>
-</div>
