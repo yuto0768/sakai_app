@@ -22,6 +22,25 @@ router.get("/:id/delete", async(req, res) => {
     res.redirect("/cart/");
 });
 
+router.post("/:id/update", async(req, res) => {
+    try {
+        let cart = await Cart.findOne({
+            where:{
+                userId:req.session.user.id,
+                productId:req.params.id
+            }
+        })
+        if(cart){
+            cart.count = req.body.count
+            await cart.save()
+        }
+        res.redirect("/cart/");
+    } catch (error) {
+        res.redirect("/cart/");
+    }
+});
+
+
 router.post("/:id/purchase", (req, res) => {
     purchaseProduct(req, res)
 });

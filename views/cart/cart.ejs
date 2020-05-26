@@ -9,29 +9,32 @@
     <%for(p of rows){%>
         <tr>
             <td>
-                <%=p.product.name%>
-                    <a href="<%=p.product.id%>/delete">削除</a>
+                <%=p.product.name%>                    
             </td>
             <td>
                 <%=p.product.price%>
             </td>
             <td>
-                <select name="cnt">
-                    <option value="1" <%= p.count==1 ? 'selected': ''  %>>1</option>
-                    <option value="2" <%= p.count==2 ? 'selected': ''  %>>2</option>
-                    <option value="3" <%= p.count==3 ? 'selected': ''  %>>3</option>
-                    <option value="4" <%= p.count==4 ? 'selected': ''  %>>4</option>
-                    <option value="5" <%= p.count==5 ? 'selected': ''  %>>5</option>
-                    <option value="6" <%= p.count==6 ? 'selected': ''  %>>6</option>
-                    <option value="7" <%= p.count==7 ? 'selected': ''  %>>7</option>
-                    <option value="8" <%= p.count==8 ? 'selected': ''  %>>8</option>
-                    <option value="9" <%= p.count==9 ? 'selected': ''  %>>9</option>
-                    <option value="10" <%= p.count==10 ? 'selected': ''  %>>10</option>
-                </select>
+                <form action="<%= p.product.id %>/update" method="POST">
+                    <select name="count">
+                        <option value="1" <%= p.count==1 ? 'selected': ''  %>>1</option>
+                        <option value="2" <%= p.count==2 ? 'selected': ''  %>>2</option>
+                        <option value="3" <%= p.count==3 ? 'selected': ''  %>>3</option>
+                        <option value="4" <%= p.count==4 ? 'selected': ''  %>>4</option>
+                        <option value="5" <%= p.count==5 ? 'selected': ''  %>>5</option>
+                        <option value="6" <%= p.count==6 ? 'selected': ''  %>>6</option>
+                        <option value="7" <%= p.count==7 ? 'selected': ''  %>>7</option>
+                        <option value="8" <%= p.count==8 ? 'selected': ''  %>>8</option>
+                        <option value="9" <%= p.count==9 ? 'selected': ''  %>>9</option>
+                        <option value="10" <%= p.count==10 ? 'selected': ''  %>>10</option>                    
+                    </select>
+                    <input type="submit" value="数量を変更" class="btn btn-secondary">
+                </form>
+                <a href="<%=p.product.id%>/delete">削除</a>
             </td>
         </tr>
         <%}%>
 </table>
-<form action="inputinfo" method="GET">
+<form action="inputinfo" method="POST">
     <input type="submit" class="btn btn-success btn-lg btn-block rounded-pill" value="住所の入力へ">
 </form>
