@@ -5,6 +5,7 @@
         <th>商品名</th>
         <th>金額</th>
         <th>数量</th>
+        <th>小計</th>
     </tr>
     <%for(p of rows){%>
         <tr>
@@ -12,7 +13,7 @@
                 <%=p.product.name%>
             </td>
             <td>
-                <%=p.product.price%>
+                <%=p.product.price%>円
             </td>
             <td>
                 <form action="<%= p.product.id %>/update" method="POST">
@@ -32,9 +33,16 @@
                 </form>
                 <a href="<%=p.product.id%>/delete">削除</a>
             </td>
+            <td>
+                <%=p.product.price * p.count%>円
+            </td>
         </tr>
         <%}%>
 </table>
+<div class="container">
+    合計
+    <%=sumprice%>円
+</div>
 <form action="inputinfo" method="GET">
     <input type="submit" class="btn btn-success btn-lg btn-block rounded-pill" value="住所の入力へ">
 </form>

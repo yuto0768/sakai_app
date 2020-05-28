@@ -14,7 +14,11 @@ router.get("/", paginate.middleware(1, 50), async(req, res) => {
             userId: req.session.user.id
         },
     })
-    res.render("cart/cart.ejs", { rows, format, paginate })
+    let sumprice = 0;
+    for (row of rows) {
+        sumprice += row.product.price * row.count;
+    }
+    res.render("cart/cart.ejs", { rows, format, paginate, sumprice })
 });
 
 router.get("/:id/delete", async(req, res) => {
