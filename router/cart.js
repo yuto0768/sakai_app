@@ -44,6 +44,9 @@ router.get("/inputinfo", async(req, res) => {
     res.render("cart/inputinfo.ejs", { rows, format, paginate });
 });
 
+router.post("/cart", async(req, res) => {
+
+});
 
 
 router.post("/purchase", async(req, res) => {
