@@ -87,6 +87,11 @@ const Product = sequelize.define('products', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
 }, {
     timestamps: true　 //行作成日時更新日時自動追加
 });

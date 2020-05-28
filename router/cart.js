@@ -83,6 +83,10 @@ router.post("/purchase", async(req, res) => {
             payment: req.body.payment
         }, { transaction: t });
         let carts = await Cart.findAll({
+            include: [
+                { model: User, required: true },
+                { model: Product, required: true }
+            ],
             where: {
                 userId: req.session.user.id
             },
@@ -93,12 +97,15 @@ router.post("/purchase", async(req, res) => {
                 productId: c.productId,
                 count: c.count
             }, { transaction: t });
+            c.product.count -= c.count;
+            await c.product.save({ transaction: t });
         }
         await Cart.destroy({ where: { userId: req.session.user.id }, transaction: t });
         await t.commit()
         res.redirect("/cart/confirm");
     } catch (error) {
         await t.rollback();
+        console.log(error);
     }
 });
 

@@ -1,5 +1,5 @@
 <style>
-    .product-image{
+    .product-image {
         width: 320px;
     }
 </style>
@@ -23,38 +23,42 @@
                             </dd>
                             <dt>商品画像（変更）</dt>
                             <dd class="input-group">
-                                <input type="file" name="photo"  class="form-control <%= error.image ? 'is-invalid' : ''%>"/>
+                                <input type="file" name="photo" class="form-control <%= error.image ? 'is-invalid' : ''%>" />
                                 <%- error.image ? `<div class="invalid-feedback">${error.image}</div>` : `` %>
-                            </dd>  
-                        <% } else { %>
-                            <dt>商品画像</dt>
-                            <dd class="input-group">
-                                <input type="file" name="photo"  class="form-control <%= error.image ? 'is-invalid' : ''%>"/>
-                                <%- error.image ? `<div class="invalid-feedback">${error.image}</div>` : `` %>
-                            </dd>  
-                        <% }%>
-                        <dt>商品名</dt>
-                        <dd class="input-group">
-                            <input type="text" value="<%=data.name%>" name="name" class="form-control <%= error.name ? 'is-invalid' : ''%>">
-                            <%- error.name ? `<div class="invalid-feedback">${error.name}</div>` : `` %>
-                        </dd>
-                        <dt>情報</dt>
-                        <dd class="input-group">
-                            <input type="text" value="<%=data.info%>" name="info" class="form-control <%= error.info ? 'is-invalid': '' %>">
-                            <%- error.info ? `<div class="invalid-feedback">${error.info}</div>` : `` %>
-                        </dd>
-                        <dt>サイズ</dt>
-                        <dd><input type="text" value="<%=data.size%>" name="size" class="form-control <%= error.size ? 'is-invalid': '' %>">
-                            <%- error.size ? `<div class="invalid-feedback">${error.size}</div>` : `` %>
-                        </dd>
-                        <dt>カラー</dt>
-                        <dd><input type="text" value="<%=data.color%>" name="color" class="form-control <%= error.color ? 'is-invalid': '' %>">
-                            <%- error.color ? `<div class="invalid-feedback">${error.color}</div>` : `` %>
-                        </dd>
-                        <dt>価格</dt>
-                        <dd><input type="text" value="<%=data.price%>" name="price" class="form-control <%= error.price ? 'is-invalid': '' %>">
-                            <%- error.price ? `<div class="invalid-feedback">${error.price}</div>` : `` %>
-                        </dd>
+                            </dd>
+                            <% } else { %>
+                                <dt>商品画像</dt>
+                                <dd class="input-group">
+                                    <input type="file" name="photo" class="form-control <%= error.image ? 'is-invalid' : ''%>" />
+                                    <%- error.image ? `<div class="invalid-feedback">${error.image}</div>` : `` %>
+                                </dd>
+                                <% }%>
+                                    <dt>商品名</dt>
+                                    <dd class="input-group">
+                                        <input type="text" value="<%=data.name%>" name="name" class="form-control <%= error.name ? 'is-invalid' : ''%>">
+                                        <%- error.name ? `<div class="invalid-feedback">${error.name}</div>` : `` %>
+                                    </dd>
+                                    <dt>情報</dt>
+                                    <dd class="input-group">
+                                        <input type="text" value="<%=data.info%>" name="info" class="form-control <%= error.info ? 'is-invalid': '' %>">
+                                        <%- error.info ? `<div class="invalid-feedback">${error.info}</div>` : `` %>
+                                    </dd>
+                                    <dt>サイズ</dt>
+                                    <dd><input type="text" value="<%=data.size%>" name="size" class="form-control <%= error.size ? 'is-invalid': '' %>">
+                                        <%- error.size ? `<div class="invalid-feedback">${error.size}</div>` : `` %>
+                                    </dd>
+                                    <dt>カラー</dt>
+                                    <dd><input type="text" value="<%=data.color%>" name="color" class="form-control <%= error.color ? 'is-invalid': '' %>">
+                                        <%- error.color ? `<div class="invalid-feedback">${error.color}</div>` : `` %>
+                                    </dd>
+                                    <dt>価格</dt>
+                                    <dd><input type="text" value="<%=data.price%>" name="price" class="form-control <%= error.price ? 'is-invalid': '' %>">
+                                        <%- error.price ? `<div class="invalid-feedback">${error.price}</div>` : `` %>
+                                    </dd>
+                                    <dt>在庫</dt>
+                                    <dd><input type="text" value="<%=data.count%>" name="count" class="form-control <%= error.count ? 'is-invalid': '' %>">
+                                        <%- error.count ? `<div class="invalid-feedback">${error.count}</div>` : `` %>
+                                    </dd>
                     </dl>
                     <input type="submit" value="保存" class="btn btn-primary">
                 </form>

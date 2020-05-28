@@ -50,12 +50,13 @@ async function getProduct(req, res, id) {
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
     upload(req, res, async(err) => {
         let row = await Product.findOne({ where: { id: id } })
+        let error = {}
         row.name = req.body.name;
         row.info = req.body.info;
         row.size = req.body.size;
         row.color = req.body.color;
         row.price = req.body.price;
-        row.image = req.file.filename;
+        row.count = req.body.count;
         if (!row.name) {
             error.name = "名前を入力してください。"
         }
@@ -71,8 +72,11 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
         if (!row.price || isNaN(row.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
             error.price = "価格を入力してください。"
         }
+        if (!row.count || isNaN(row.count)) {
+            error.count = "在庫数を入力してください"
+        }
         if (req.file) {
-            data.image = req.file.filename
+            row.image = req.file.filename
         } else {
             error.image = "写真を設定してください。"
         }
@@ -96,6 +100,7 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
         data.color = req.body.color;
         data.price = req.body.price;
         data.image = req.body.image;
+        data.count = req.body.count;
         if (!data.name) {
             error.name = "名前を入力してください。"
         }
@@ -110,6 +115,9 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
         }
         if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
             error.price = "価格を入力してください。"
+        }
+        if (!data.count || isNaN(data.count)) {
+            error.count = "在庫数を入力してください"
         }
         if (req.file) {
             data.image = req.file.filename
