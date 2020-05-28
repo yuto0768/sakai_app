@@ -139,7 +139,7 @@ const Purchase = sequelize.define('purchase', {
 
 const Cart = sequelize.define('cart', {
     count: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         defaultValue: 1,
     }
 

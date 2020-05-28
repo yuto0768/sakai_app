@@ -34,7 +34,6 @@ app.use(function(req, res, next) {
 const login = function(req, res, next) {
     if (!req.session.user && req.originalUrl != "/" && req.originalUrl != "/login") {
         res.redirect("/login")
-        next("route")
     } else {
         next()
     }
