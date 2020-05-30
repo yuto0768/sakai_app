@@ -67,14 +67,6 @@ const Product = sequelize.define('products', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    color: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    size: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
     info: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -162,6 +154,24 @@ const PurchaseProduct = sequelize.define('purchaseproduct', {
     timestamps: false
 });
 
+const Size = sequelize.define('size', {
+    size: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    }
+
+}, {
+    timestamps: false
+});
+
+const Color = sequelize.define('color', {
+    color: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    }
+}, {
+    timestamps: false
+});
 //PurchaseとProductを1:n(purchase:product)で関連付ける
 //これにより、productテーブルにUserId列が追加されます
 //PurchaseはUserに所属する（Userは複数のPurchaseを保持できる）という意味です
