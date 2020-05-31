@@ -22,21 +22,29 @@
                             <input type="text" value="<%=row.info%>" name="info" class="form-control <%= error.info ? 'is-invalid': '' %>">
                             <%- error.info ? `<div class="invalid-feedback">${error.info}</div>` : `` %>
                         </dd>
-                        <dt>サイズ</dt>
-                        <dd><input type="text" value="<%=row.size%>" name="size" class="form-control <%= error.size ? 'is-invalid': '' %>">
-                            <%- error.size ? `<div class="invalid-feedback">${error.size}</div>` : `` %>
-                        </dd>
-                        <dt>カラー</dt>
-                        <dd><input type="text" value="<%=row.color%>" name="color" class="form-control <%= error.color ? 'is-invalid': '' %>">
-                            <%- error.color ? `<div class="invalid-feedback">${error.color}</div>` : `` %>
+                        <dt>オプション</dt>
+                        <dd class="container">
+                            <%for(option of row.options){%>
+                                <div class="row">
+                                    <div class="col">
+                                        <label>サイズ</label>
+                                        <input type="text" value="<%=option.size%>" name="size" class="form-control <%= error.size ? 'is-invalid': '' %>">
+                                        <%- error.size ? `<div class="invalid-feedback">${error.size}</div>` : `` %>
+                                    </div>
+                                    <div class="col">
+                                        <label>カラー</label><input type="text" value="<%=option.color%>" name="color" class="form-control <%= error.color ? 'is-invalid': '' %>">
+                                        <%- error.color ? `<div class="invalid-feedback">${error.color}</div>` : `` %>
+                                    </div>
+                                    <div class="col">
+                                        <label>在庫</label><input type="text" value="<%=option.count%>" name="count" class="form-control <%= error.count ? 'is-invalid': '' %>">
+                                        <%- error.count ? `<div class="invalid-feedback">${error.count}</div>` : `` %>
+                                    </div>
+                                </div>
+                                <%}%>
                         </dd>
                         <dt>価格</dt>
                         <dd><input type="text" value="<%=row.price%>" name="price" class="form-control <%= error.price ? 'is-invalid': '' %>">
                             <%- error.price ? `<div class="invalid-feedback">${error.price}</div>` : `` %>
-                        </dd>
-                        <dt>在庫</dt>
-                        <dd><input type="text" value="<%=row.count%>" name="count" class="form-control <%= error.count ? 'is-invalid': '' %>">
-                            <%- error.count ? `<div class="invalid-feedback">${error.count}</div>` : `` %>
                         </dd>
                     </dl>
                     <input type="submit" value="保存" class="btn btn-primary">

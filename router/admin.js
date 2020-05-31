@@ -47,7 +47,8 @@ async function getProducts(req, res) {
 
 async function getProduct(req, res, id) {
     let row = await Product.findOne({
-        where: { id: id }
+        where: { id: id },
+        include: [{ model: Option, required: true }]
     })
     let error = {}
     res.render("admin/edit.ejs", { row, error }); //ejsで使う変数を｛｝の中に書く
@@ -55,45 +56,55 @@ async function getProduct(req, res, id) {
 
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
     upload(req, res, async(err) => {
+        let t = await sequelize.transaction();
         let row = await Product.findOne({ where: { id: id } })
         let error = {}
         row.name = req.body.name;
         row.info = req.body.info;
-        row.size = req.body.size;
-        row.color = req.body.color;
         row.price = req.body.price;
-        row.count = req.body.count;
-        if (!row.name) {
-            error.name = "名前を入力してください。"
-        }
-        if (!row.info) {
-            error.info = "情報を入力してください。"
-        }
-        if (!row.size) {
-            error.size = "サイズを入力してください。"
-        }
-        if (!row.color) {
-            error.color = "カラーを入力してください。"
-        }
-        if (!row.price || isNaN(row.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
-            error.price = "価格を入力してください。"
-        }
-        if (!row.count || isNaN(row.count)) {
-            error.count = "在庫数を入力してください"
-        }
-        if (req.file) {
-            row.image = req.file.filename
-        } else {
-            error.image = "写真を設定してください。"
-        }
-        if (Object.keys(error).length) {
+        let option = new Option()
+        option.size = req.body.size;
+        option.color = req.body.color;
+        option.count = req.body.count;
+        try {
+            if (!row.name) {
+                error.name = "名前を入力してください。"
+            }
+            if (!row.info) {
+                error.info = "情報を入力してください。"
+            }
+            if (!option.size) {
+                error.size = "サイズを入力してください。"
+            }
+            if (!option.color) {
+                error.color = "カラーを入力してください。"
+            }
+            if (!row.price || isNaN(row.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
+                error.price = "価格を入力してください。"
+            }
+            if (!option.count || isNaN(option.count)) {
+                error.count = "在庫数を入力してください"
+            }
+            if (req.file) {
+                row.image = req.file.filename
+            } else {
+                error.image = "写真を設定してください。"
+            }
+            if (Object.keys(error).length) {
+                throw error;
+            } else {
+                await row.save();
+                option.productId = row.id;
+                await option.save({ transaction: t });
+                await t.commit()
+                res.redirect("/admin");
+            }
+        } catch (error) {
+            await t.rollback();
             error.message = "未入力の項目があります。"
-            res.render("admin/edit.ejs", { row, error });
-        } else {
-            await row.save();
-            res.redirect("/admin");
+            res.render("admin/edit.ejs", { row, option, error });
         }
-    })
+    });
 }
 
 async function addProduct(req, res) { //formで送られてきた情報はreqに入る

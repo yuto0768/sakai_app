@@ -197,6 +197,8 @@ async function setup() {　　 //force:trueでデータ全削除
         // テスト用のユーザーを1件登録
     let tanaka = await User.create({ name: "tanaka", idType: IdType.Mail, mail: "abc@gmail.com", password: "pass" })
     let converse = await Product.create({ name: "Converse", color: "RED,WHITE,BLACK", size: "24.5cm,25.0cm,25.5cm,26.0cm,26.5cm,27.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    Option.create({ color: "WHITE", size: "25.0cm", productId: "converse.id" })
+
     let converse1 = await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse2", color: "BLACK", size: "25.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse3", color: "BLACK", size: "26.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
