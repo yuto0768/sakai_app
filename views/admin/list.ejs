@@ -20,7 +20,11 @@
                         <%=row.price%>
                     </td>
                     <td>
-                        <%=row.count%>
+                        <%for(o of row.options){%>
+                            <%=o.size%>
+                                <%=o.color%>
+                                    <%=o.count%>
+                                        <%}%>
                     </td>
                 </tr>
                 <% } %>

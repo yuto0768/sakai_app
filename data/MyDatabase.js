@@ -154,21 +154,21 @@ const PurchaseProduct = sequelize.define('purchaseproduct', {
     timestamps: false
 });
 
-const Size = sequelize.define('size', {
+const Option = sequelize.define('option', {
     size: {
         type: Sequelize.STRING,
         allowNull: true,
-    }
+    },
 
-}, {
-    timestamps: false
-});
-
-const Color = sequelize.define('color', {
     color: {
         type: Sequelize.STRING,
         allowNull: true,
+    },
+    count: {
+        type: Sequelize.STRING,
+        defaultValue: 1,
     }
+
 }, {
     timestamps: false
 });
@@ -186,6 +186,8 @@ User.hasMany(Purchase);
 Purchase.belongsToMany(Product, { through: PurchaseProduct });
 Cart.belongsTo(User);
 Cart.belongsTo(Product);
+Option.belongsTo(Product);
+Product.hasMany(Option);
 
 User.belongsToMany(Product, { through: Cart, as: "carts" })
 Product.belongsToMany(User, { through: Cart })
@@ -237,5 +239,6 @@ module.exports = {
     Purchase,
     Cart,
     PurchaseProduct,
-    sequelize
+    sequelize,
+    Option
 }

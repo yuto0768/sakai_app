@@ -25,7 +25,7 @@ const fileFilter = function(req, file, cb) {
 }
 
 var upload = multer({ storage: multerStorage, fileFilter }).single("photo");
-var { Product, Purchase, User } = require("../data/MyDatabase");
+var { Product, Purchase, User, Option, sequelize } = require("../data/MyDatabase");
 
 const Crypto = require("crypto");
 
@@ -37,12 +37,18 @@ function getSecureRandom() {
 }
 
 async function getProducts(req, res) {
-    let rows = await Product.findAll()
+    let rows = await Product.findAll({
+        include: [
+            { model: Option, required: true }
+        ]
+    })
     res.render("admin/list.ejs", { rows });
 }
 
 async function getProduct(req, res, id) {
-    let row = await Product.findOne({ where: { id: id } })
+    let row = await Product.findOne({
+        where: { id: id }
+    })
     let error = {}
     res.render("admin/edit.ejs", { row, error }); //ejsで使う変数を｛｝の中に書く
 }
@@ -92,44 +98,55 @@ async function updateProduct(req, res, id) { //formで送られてきた情報�
 
 async function addProduct(req, res) { //formで送られてきた情報はreqに入る
     upload(req, res, async(err) => {
+        let t = await sequelize.transaction();
         let data = new Product()
         let error = {}
         data.name = req.body.name;
         data.info = req.body.info;
-        data.size = req.body.size;
-        data.color = req.body.color;
         data.price = req.body.price;
         data.image = req.body.image;
-        data.count = req.body.count;
-        if (!data.name) {
-            error.name = "名前を入力してください。"
-        }
-        if (!data.info) {
-            error.info = "情報を入力してください。"
-        }
-        if (!data.size) {
-            error.size = "サイズを入力してください。"
-        }
-        if (!data.color) {
-            error.color = "カラーを入力してください。"
-        }
-        if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
-            error.price = "価格を入力してください。"
-        }
-        if (!data.count || isNaN(data.count)) {
-            error.count = "在庫数を入力してください"
-        }
-        if (req.file) {
-            data.image = req.file.filename
-        } else if (!data.image) {
-            error.image = "写真を設定してください。"
-        }
-        if (Object.keys(error).length) {
+
+        let option = new Option()
+        option.size = req.body.size;
+        option.color = req.body.color;
+        option.count = req.body.count;
+        try {
+            if (!data.name) {
+                error.name = "名前を入力してください。"
+            }
+            if (!data.info) {
+                error.info = "情報を入力してください。"
+            }
+            if (!option.size) {
+                error.size = "サイズを入力してください。"
+            }
+            if (!option.color) {
+                error.color = "カラーを入力してください。"
+            }
+            if (!data.price || isNaN(data.price)) { //isNaN=数字の時FALSEで数字以外がTRUE
+                error.price = "価格を入力してください。"
+            }
+            if (!option.count || isNaN(option.count)) {
+                error.count = "在庫数を入力してください"
+            }
+            if (req.file) {
+                data.image = req.file.filename
+            } else if (!data.image) {
+                error.image = "写真を設定してください。"
+            }
+            if (Object.keys(error).length) {
+                throw error;
+            } else {
+                await data.save({ transaction: t });
+                option.productId = data.id;
+                await option.save({ transaction: t });
+                await t.commit()
+                res.redirect("/admin");
+            }
+        } catch (error) {
+            await t.rollback();
             error.message = "未入力の項目があります。"
-            res.render("admin/add.ejs", { data, error });
-        } else {
-            await data.save();
-            res.redirect("/admin");
+            res.render("admin/add.ejs", { data, option, error });
         }
     });
 }
@@ -149,7 +166,8 @@ router.get("/", (req, res) => {
 
 router.get("/add", (req, res) => {
     let data = new Product()
-    res.render("admin/add.ejs", { data, error: {} }); //使用する変数を第２引数としてかく
+    let option = new Option()
+    res.render("admin/add.ejs", { data, option, error: {} }); //使用する変数を第２引数としてかく
 });
 
 router.get("/history", async(req, res) => {

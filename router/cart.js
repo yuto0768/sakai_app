@@ -1,5 +1,5 @@
 const router = require("express").Router();
-var { Product, Purchase, User, Cart, PurchaseProduct, sequelize, Size, Color } = require("../data/MyDatabase");
+var { Product, Purchase, User, Cart, PurchaseProduct, sequelize } = require("../data/MyDatabase");
 
 var format = require('date-format');
 const paginate = require('express-paginate');
