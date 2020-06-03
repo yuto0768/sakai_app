@@ -57,7 +57,10 @@ async function getProduct(req, res, id) {
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
     upload(req, res, async(err) => {
         let t = await sequelize.transaction();
-        let row = await Product.findOne({ where: { id: id } })
+        let row = await Product.findOne({
+            where: { id: id },
+            include: [{ model: Option, required: true }]
+        })
         let error = {}
         row.name = req.body.name;
         row.info = req.body.info;
