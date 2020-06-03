@@ -2,7 +2,7 @@ const router = require("express").Router();
 var multer = require('multer');
 var upload = multer({ dest: ' uploads/' });
 const db = require("../data/MyDatabase")
-const { Product, Purchase, User, Cart } = require("../data/MyDatabase")
+const { Product, Purchase, User, Cart, Option, sequelize } = require("../data/MyDatabase")
 
 
 async function getProducts(req, res) {
@@ -11,7 +11,10 @@ async function getProducts(req, res) {
 }
 
 async function getProduct(req, res, id) {
-    let product = await Product.findOne({ where: { id: id } })
+    let product = await Product.findOne({
+        where: { id: id },
+        include: [{ model: Option, required: true }]
+    })
     res.render("products/details.ejs", { layout: "layout_login.ejs", product });
 }
 
