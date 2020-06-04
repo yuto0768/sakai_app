@@ -13,7 +13,7 @@ async function getProducts(req, res) {
 async function getProduct(req, res, id) {
     let product = await Product.findOne({
         where: { id: id },
-        include: [{ model: Option, required: true }]
+        include: [{ model: Option, required: false }]
     })
     res.render("products/details.ejs", { layout: "layout_login.ejs", product });
 }

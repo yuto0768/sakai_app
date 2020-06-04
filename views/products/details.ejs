@@ -34,7 +34,7 @@
             <div class="col-7">
                 <div class="size h-100">
                     <div class="btn-group-toggle products-option" data-toggle="buttons">
-                        <% for(s of row.size.split(",")){ %>
+                        <% for(s of product.size){ %>
                             <label class="btn btn-outline-info rounded-pill">
                             <input type="radio" name="options" value="<%= s %>" autocomplete="off"> <%= s %>
                             </label>
@@ -45,7 +45,7 @@
             <div class="col-5">
                 <div class="row price">
                     <p>￥
-                        <%=row.price%><span>(税込み)</span></p>
+                        <%=product.price%><span>(税込み)</span></p>
                 </div>
                 <hr size="10" width="70%" noshade style="margin:0em 10em auto auto;">
                 <div class="row purchase-btn h-50">
