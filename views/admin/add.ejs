@@ -60,6 +60,7 @@
                                                 <%- error.count ? `<div class="invalid-feedback">${error.count}</div>` : `` %>
                                             </div>
                                         </div>
+                                        <input type="button" value="+" id="addForm">
                                     </dd>
                                     <dt>価格</dt>
                                     <dd><input type="text" value="<%=data.price%>" name="price" class="form-control <%= error.price ? 'is-invalid': '' %>">
