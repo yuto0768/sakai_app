@@ -36,7 +36,7 @@
                     <div class="btn-group-toggle products-option" data-toggle="buttons">
                         <% for(option of product.options){ %>
                             <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="options" value="<%= s %>" autocomplete="off"> <%= s %>
+                            <input type="radio" name="options" value="<%=option.size%>" autocomplete="off"> <%=option.size%>
                             </label>
                             <% } %>
                     </div>
