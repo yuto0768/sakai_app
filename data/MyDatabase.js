@@ -200,6 +200,11 @@ async function setup() {　　 //force:trueでデータ全削除
 
 
     let converse1 = await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
+    await Option.create({ size: "24cm", color: "Red", productId: converse.id });
+    await Option.create({ size: "25cm", color: "Red", productId: converse.id });
+    await Option.create({ size: "26cm", color: "Red", productId: converse.id });
+    await Option.create({ size: "24cm", color: "Blue", productId: converse.id });
+    await Option.create({ size: "25cm", color: "White", productId: converse.id });
     await Product.create({ name: "Converse2", color: "BLACK", size: "25.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse3", color: "BLACK", size: "26.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse4", color: "BLACK", size: "26.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
