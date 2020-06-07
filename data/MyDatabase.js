@@ -186,8 +186,10 @@ User.hasMany(Purchase);
 Purchase.belongsToMany(Product, { through: PurchaseProduct });
 Cart.belongsTo(User);
 Cart.belongsTo(Product);
+Cart.belongsTo(Option);
 Option.belongsTo(Product);
 Product.hasMany(Option);
+
 
 User.belongsToMany(Product, { through: Cart, as: "carts" })
 Product.belongsToMany(User, { through: Cart })
@@ -201,7 +203,7 @@ async function setup() {　　 //force:trueでデータ全削除
 
     let converse1 = await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
 
-    await Option.create({ size: "24cm", color: "Red", productId: converse.id });
+    let option1 = await Option.create({ size: "24cm", color: "Red", productId: converse.id });
     await Option.create({ size: "25cm", color: "Red", productId: converse.id });
     await Option.create({ size: "26cm", color: "Red", productId: converse.id });
     await Option.create({ size: "24cm", color: "Blue", productId: converse.id });
@@ -213,8 +215,7 @@ async function setup() {　　 //force:trueでデータ全削除
 
 
 
-    await tanaka.addCart(converse)
-    await tanaka.addCart(converse1, { through: { count: 10 } })
+    await tanaka.addCart(converse1, { through: { count: 10, optionId: option1.id } })
     let cart = await tanaka.getCarts()
         //sample display cart lis
     cart.forEach(c => console.log(`cart:${c.name}, count:${c.cart.count}`))

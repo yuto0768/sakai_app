@@ -46,8 +46,7 @@
                                     <dt>オプション</dt>
                                     <dd class="container">
                                         <div class="row">
-                                            <div id="form">
-                                                <input type="text">
+                                            <div id="options">
                                                 <div class="col">
                                                     <label>サイズ</label>
                                                     <input type="text" value="<%=option.size%>" name="size" class="form-control <%= error.size ? 'is-invalid': '' %>">
@@ -64,11 +63,13 @@
                                             </div>
                                         </div>
                                         <input type="button" value="+" id="addForm">
-                                        <% $(function(){%>
-                                            <%  $('#addForm').click(function(){%>
-                                                <%    $('#form').append('<input type="text">');%>
-                                                    <%   });%>
-                                                        <%  });%>
+                                        <script>
+                                            $(function() {
+                                                $('#addForm').click(function() {
+                                                    $('#options').append($('.option-source').clone().removeClass("option-source"));
+                                                });
+                                            });
+                                        </script>
                                     </dd>
                                     <dt>価格</dt>
                                     <dd><input type="text" value="<%=data.price%>" name="price" class="form-control <%= error.price ? 'is-invalid': '' %>">
@@ -78,4 +79,21 @@
                     <input type="submit" value="保存" class="btn btn-primary">
                 </form>
             </div>
+</div>
+<div class="d-none">
+    <div class="row option-source">
+        <div class="col">
+            <label>サイズ</label>
+            <input type="text" value="<%=option.size%>" name="size" class="form-control <%= error.size ? 'is-invalid': '' %>">
+            <%- error.size ? `<div class="invalid-feedback">${error.size}</div>` : `` %>
+        </div>
+        <div class="col">
+            <label>カラー</label><input type="text" value="<%=option.color%>" name="color" class="form-control <%= error.color ? 'is-invalid': '' %>">
+            <%- error.color ? `<div class="invalid-feedback">${error.color}</div>` : `` %>
+        </div>
+        <div class="col">
+            <label>在庫</label><input type="text" value="<%=option.count%>" name="count" class="form-control <%= error.count ? 'is-invalid': '' %>">
+            <%- error.count ? `<div class="invalid-feedback">${error.count}</div>` : `` %>
+        </div>
+    </div>
 </div>

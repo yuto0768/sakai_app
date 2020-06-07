@@ -46,12 +46,12 @@ async function getProducts(req, res) {
 }
 
 async function getProduct(req, res, id) {
-    let row = await Product.findOne({
+    let product = await Product.findOne({
         where: { id: id },
         include: [{ model: Option, required: true }]
     })
     let error = {}
-    res.render("admin/edit.ejs", { row, error }); //ejsで使う変数を｛｝の中に書く
+    res.render("admin/edit.ejs", { product, error }); //ejsで使う変数を｛｝の中に書く
 }
 
 async function updateProduct(req, res, id) { //formで送られてきた情報はreqに入る
