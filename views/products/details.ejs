@@ -14,48 +14,53 @@
         <%=row.info%>
     </p>
 </div>
-<form action="/products/<%= product.id %>/purchase" method="POST">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <img src="/photo/product/<%=row.image%>" alt="写真" width="350" height="300"></a>
-                <p><input type="checkbox" name="q1" value="white"> WHITE</p>
-            </div>
-            <div class="col">
-                <img src="/public/images/products_img/32060181.jpg" alt="写真" width="350" height="300"></a>
-                <p><input type="checkbox" name="q1" value="black"> BLACK</p>
-            </div>
-            <div class="col">
-                <img src="/public/images/products_img/32060182.jpg" alt="写真" width="350" height="300"></a>
-                <p><input type="checkbox" name="q1" value="red"> RED</p>
-            </div>
-        </div>
-        <div class="row info">
-            <div class="col-7">
-                <div class="size h-100">
-                    <div class="btn-group-toggle products-option" data-toggle="buttons">
-                        <% for(option of product.options){ %>
-                            <label class="btn btn-outline-info rounded-pill">
-                            <input type="radio" name="option" value="<%=option.id%>" autocomplete="off"> <%=option.size%>
-                            </label>
-                            <% } %>
+<%if(error){%>
+    <div class="alert-danger">
+        <%=error%>
+    </div>
+    <%}%>
+        <form action="/products/<%= product.id %>/purchase" method="POST">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <img src="/photo/product/<%=row.image%>" alt="写真" width="350" height="300"></a>
+                        <p><input type="checkbox" name="q1" value="white"> WHITE</p>
+                    </div>
+                    <div class="col">
+                        <img src="/public/images/products_img/32060181.jpg" alt="写真" width="350" height="300"></a>
+                        <p><input type="checkbox" name="q1" value="black"> BLACK</p>
+                    </div>
+                    <div class="col">
+                        <img src="/public/images/products_img/32060182.jpg" alt="写真" width="350" height="300"></a>
+                        <p><input type="checkbox" name="q1" value="red"> RED</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-5">
-                <div class="row price">
-                    <p>￥
-                        <%=product.price%><span>(税込み)</span></p>
+                <div class="row info">
+                    <div class="col-7">
+                        <div class="size h-100">
+                            <div class="btn-group-toggle products-option" data-toggle="buttons">
+                                <% for(option of product.options){ %>
+                                    <label class="btn btn-outline-info rounded-pill">
+                            <input type="radio" name="option" value="<%=option.id%>" autocomplete="off"> <%=option.size%>
+                            </label>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="row price">
+                            <p>￥
+                                <%=product.price%><span>(税込み)</span></p>
+                        </div>
+                        <hr size="10" width="70%" noshade style="margin:0em 10em auto auto;">
+                        <div class="row purchase-btn h-50">
+                            <input type="submit" class="btn btn-success btn-lg btn-block rounded-pill" value="購入">
+                        </div>
+                    </div>
                 </div>
-                <hr size="10" width="70%" noshade style="margin:0em 10em auto auto;">
-                <div class="row purchase-btn h-50">
-                    <input type="submit" class="btn btn-success btn-lg btn-block rounded-pill" value="購入">
-                </div>
+                <!--row-->
             </div>
+            <!--container-->
+        </form>
         </div>
-        <!--row-->
-    </div>
-    <!--container-->
-</form>
-</div>
-<!--main-sentense-->
+        <!--main-sentense-->

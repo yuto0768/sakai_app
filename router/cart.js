@@ -39,7 +39,8 @@ router.get("/inputinfo", async(req, res) => {
     let rows = await Cart.findAll({
         include: [
             { model: User, required: true },
-            { model: Product, required: true }
+            { model: Product, required: true },
+            { model: Option, required: false }
         ],
         where: {
             userId: req.session.user.id
