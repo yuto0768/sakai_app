@@ -53,3 +53,22 @@ table tr:last-child td:first-child {
 table tr:last-child td:last-child {
     border-radius: 0 0 5px 0;
 }
+
+.box {
+    margin: 0 0 0 auto;
+    padding: 1em;
+    width: 90%;
+    border: 5px double #8491c3;
+    /*太さ・線種・色*/
+    color: #333;
+    /* 文字色 */
+    background-color: #fff;
+    /* 背景色 */
+    border-radius: 1px;
+    /*角の丸み*/
+}
+
+.box p {
+    margin: 0;
+    padding: 0;
+}

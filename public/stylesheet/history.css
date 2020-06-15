@@ -53,3 +53,17 @@ table tr:last-child td:first-child {
 table tr:last-child td:last-child {
     border-radius: 0 0 5px 0;
 }
+
+.box {
+    margin: 1em 0 2em auto;
+    font-size: 2em;
+    padding: 1em;
+    width: 90%;
+    border: 5px double #8491c3;
+    color: #333;
+    border-radius: 1px;
+}
+
+.sum {
+    text-align: right;
+}

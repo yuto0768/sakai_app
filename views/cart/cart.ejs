@@ -41,10 +41,14 @@
         </tr>
         <%}%>
 </table>
-<div class="container">
-    合計
-    <%=sumprice%>円
+<div class="box">
+    <div class="row sum">
+        <p>合計
+            <%=sumprice%>円(税込み)</p>
+    </div>
+    <div class="row bt">
+        <form action="inputinfo" method="GET">
+            <input type="submit" class="btn btn-success btn-lg btn-block rounded-pill" value="購入手続きへ">
+        </form>
+    </div>
 </div>
-<form action="inputinfo" method="GET">
-    <input type="submit" class="btn btn-success btn-lg btn-block rounded-pill" value="住所の入力へ">
-</form>

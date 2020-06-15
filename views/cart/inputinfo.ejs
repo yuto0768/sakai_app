@@ -139,7 +139,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg">　確　認　</button>
+                        <script type="text/javascript">
+                            function disp() {
+                                if (window.confirm('購入を確定しますか？')) {
+                                    location.href = "example_confirm.html";
+                                } else {
+                                    window.alert('キャンセルされました');
+                                }
+                            }
+                        </script>
+                        <button type="submit" class="btn btn-success btn-lg" 　onClick="disp()">　確　認　</button>
                     </div>
         </div>
         </fieldset>
