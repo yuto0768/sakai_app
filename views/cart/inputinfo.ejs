@@ -28,7 +28,7 @@
             </table>
         </div>
         <div class="container private-info">
-            <form class="form-horizontal" action="purchase" method="POST">
+            <form id="form" class="form-horizontal" action="purchase" method="POST">
                 <fieldset>
                     <legend>ご注文様</legend>
                     <hr size="5" color="blue">
@@ -140,15 +140,30 @@
                     </div>
                     <div class="form-group">
                         <script type="text/javascript">
-                            function disp() {
-                                if (window.confirm('購入を確定しますか？')) {
-                                    location.href = "example_confirm.html";
-                                } else {
-                                    window.alert('キャンセルされました');
-                                }
-                            }
+                            // function disp(e) {
+                            //     if (window.confirm('購入を確定しますか？')) {
+                            //         //location.href = "example_confirm.html";
+
+                            //     } else {
+                            //         window.alert('キャンセルされました');
+                            //     }
+                            // }
+
+                            // $(document).ready() はページの読み込みが完了した時に実行されます
+                            $(document).ready(()=>{
+                                //confrirmクリック時のイベントを設定します
+                                $("#confirm").on("click", (e)=>{
+                                    //デフォルトの動作（サブミット実行）を停止します
+                                    e.preventDefault()                                    
+                                    if (window.confirm('購入を確定しますか？')) {
+                                        $("#form").submit()
+                                    } else {
+                                        window.alert('キャンセルされました');
+                                    }
+                                })
+                            })
                         </script>
-                        <button type="submit" class="btn btn-success btn-lg" 　onClick="disp()">　確　認　</button>
+                        <button id="confirm" class="btn btn-success btn-lg">　確　認　</button>
                     </div>
         </div>
         </fieldset>
