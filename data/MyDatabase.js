@@ -189,6 +189,8 @@ Cart.belongsTo(Product);
 Cart.belongsTo(Option);
 Option.belongsTo(Product);
 Product.hasMany(Option);
+Option.belongsTo(Purchase);
+Purchase.hasMany(Option);
 
 
 User.belongsToMany(Product, { through: Cart, as: "carts" })
