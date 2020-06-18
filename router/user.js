@@ -3,6 +3,7 @@ var { Product, Purchase, User, Option } = require("../data/MyDatabase");
 
 var format = require('date-format');
 const paginate = require('express-paginate');
+const { canTreatArrayAsAnd } = require("sequelize/types/lib/utils");
 
 router.get("/", paginate.middleware(1, 50), async(req, res) => {
     let rows = await Purchase.findAll({

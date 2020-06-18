@@ -1,5 +1,5 @@
 const router = require("express").Router();
-var { Product, Purchase, User, Cart, PurchaseProduct, sequelize, Option } = require("../data/MyDatabase");
+var { Product, Purchase, User, Cart, OptionPurchase, sequelize, Option } = require("../data/MyDatabase");
 
 var format = require('date-format');
 const paginate = require('express-paginate');
@@ -86,7 +86,6 @@ router.post("/purchase", async(req, res) => {
         }, { transaction: t });
         let carts = await Cart.findAll({
             include: [
-                { model: User, required: true },
                 { model: Product, required: true }
             ],
             where: {
@@ -94,9 +93,9 @@ router.post("/purchase", async(req, res) => {
             },
         });
         for (c of carts) {
-            await PurchaseProduct.create({
+            await OptionPurchase.create({
                 purchaseId: purchase.id,
-                productId: c.productId,
+                optionId: c.optionId,
                 count: c.count
             }, { transaction: t });
             c.product.count -= c.count;
