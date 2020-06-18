@@ -172,6 +172,17 @@ const Option = sequelize.define('option', {
 }, {
     timestamps: false
 });
+
+const OptionPurchase = sequelize.define('optionpurchase', {
+    count: {
+        type: Sequelize.STRING,
+        defaultValue: 1,
+    },
+
+
+}, {
+    timestamps: false
+});
 //PurchaseとProductを1:n(purchase:product)で関連付ける
 //これにより、productテーブルにUserId列が追加されます
 //PurchaseはUserに所属する（Userは複数のPurchaseを保持できる）という意味です
@@ -189,7 +200,7 @@ Cart.belongsTo(Product);
 Cart.belongsTo(Option);
 Option.belongsTo(Product);
 Product.hasMany(Option);
-Option.belongsTo(Purchase);
+Option.belongsToMany(Purchase, { through: OptionPurchase });
 Purchase.hasMany(Option);
 
 
@@ -206,17 +217,32 @@ async function setup() {　　 //force:trueでデータ全削除
     let converse1 = await Product.create({ name: "Converse1", color: "WHITE", size: "25.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
 
     let option1 = await Option.create({ size: "24cm", color: "Red", productId: converse.id });
-    await Option.create({ size: "25cm", color: "Red", productId: converse.id });
-    await Option.create({ size: "26cm", color: "Red", productId: converse.id });
+    let option2 = await Option.create({ size: "25cm", color: "Red", productId: converse.id });
+    let option3 = await Option.create({ size: "26cm", color: "Red", productId: converse.id });
     await Option.create({ size: "24cm", color: "Blue", productId: converse.id });
     await Option.create({ size: "25cm", color: "White", productId: converse.id });
     await Product.create({ name: "Converse2", color: "BLACK", size: "25.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse3", color: "BLACK", size: "26.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse4", color: "BLACK", size: "26.5cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
     await Product.create({ name: "Converse5", color: "BLACK", size: "27.0cm", info: "aabcde", image: "32060180.jpg", price: "8800" })
-
-
-
+    let purchase1 = await Purchase.create({ userId: tanaka.id, });
+    await purchase1.addOption(option1, { through: { count: 10 } });
+    await purchase1.addOption(option2, { through: { count: 5 } });
+    await purchase1.addOption(option3, { through: { count: 1 } });
+    let purchases = await Purchase.findAll({
+        include: [
+            { model: User, required: true },
+            { model: Option, required: true, include: [{ model: Product, required: true }] }
+        ],
+        where: {
+            userId: tanaka.id
+        },
+    })
+    for (p of purchases) {
+        for (o of p.options) {
+            console.log(`purchase:${o.product.name},color:${o.color},size${o.size}`)
+        }
+    }
     await tanaka.addCart(converse1, { through: { count: 10, optionId: option1.id } })
     let cart = await tanaka.getCarts()
         //sample display cart lis
@@ -226,19 +252,6 @@ async function setup() {　　 //force:trueでデータ全削除
     //関連付けのサンプルコード
     //田中さんがConverseを買ったというデータになります
     await Purchase.create({ userId: tanaka.id, productId: converse.id })
-
-    //PurchaseとProduct、Userをjoinして、結果を表示します。
-    let purchases = await Purchase.findAll({
-        include: [
-            { model: User, required: true },
-            { model: Product, required: true }
-        ],
-        where: { userId: tanaka.id }
-    })
-    console.log(`田中さんの購入履歴は${purchases.length}件あります`)
-    for (p of purchases) {
-        console.log(`購入者:${p.user.name} 品名:${p.product.name}`)
-    }
 }
 
 test();
@@ -251,5 +264,6 @@ module.exports = {
     Cart,
     PurchaseProduct,
     sequelize,
-    Option
+    Option,
+    OptionPurchase
 }

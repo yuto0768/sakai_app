@@ -12,10 +12,16 @@
                 <%=format('yy/MM/dd  hh:mm', p.createdAt)%>
             </td>
             <td>
-                <%=p.purchase.name%>
-            </td>
-            <td>
-                <%=p.purchase.price%>
+                <ul>
+                    <%for (o of p.options) {%>
+                        <li>
+                            <%=o.product.name%>
+                                <%=o.size%>
+                                    <%=o.color%>
+                                        <%=o.product.price%>
+                        </li>
+                        <%}%>
+                </ul>
             </td>
         </tr>
         <%}%>
