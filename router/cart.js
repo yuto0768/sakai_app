@@ -19,7 +19,7 @@ router.get("/", paginate.middleware(1, 50), async(req, res) => {
     for (row of rows) {
         sumprice += row.product.price * row.count;
     }
-    res.render("cart/cart.ejs", { rows, format, paginate, sumprice })
+    res.render("cart/cart.ejs", { layout: "layout_second.ejs", rows, format, paginate, sumprice })
 });
 
 router.get("/:id/delete", async(req, res) => {
@@ -47,7 +47,7 @@ router.get("/inputinfo", async(req, res) => {
         },
     })
 
-    res.render("cart/inputinfo.ejs", { rows, format, paginate });
+    res.render("cart/inputinfo.ejs", { layout: "layout_second.ejs", rows, format, paginate });
 });
 
 
@@ -111,7 +111,7 @@ router.post("/purchase", async(req, res) => {
 });
 
 router.get("/confirm", (req, res) => {
-    res.render("cart/confirm.ejs");
+    res.render("cart/confirm.ejs", { layout: "layout_second.ejs" });
 });
 
 module.exports = router;

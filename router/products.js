@@ -7,7 +7,7 @@ const { Product, Purchase, User, Cart, Option, sequelize } = require("../data/My
 
 async function getProducts(req, res) {
     let rows = await Product.findAll()
-    res.render("products/products.ejs", { layout: "layout_login.ejs", rows });
+    res.render("products/products.ejs", { layout: "layout_second.ejs", rows });
 }
 
 async function getProduct(req, res, id) {
@@ -15,7 +15,7 @@ async function getProduct(req, res, id) {
         where: { id: id },
         include: [{ model: Option, required: false }]
     })
-    res.render("products/details.ejs", { layout: "layout_login.ejs", product, error: null });
+    res.render("products/details.ejs", { layout: "layout_second.ejs", product, error: null });
 }
 
 
@@ -39,7 +39,7 @@ router.post("/:id/purchase", async(req, res) => {
             include: [{ model: Option, required: false }]
         })
         let error = "未入力の項目があります";
-        res.render("products/details.ejs", { layout: "layout_login.ejs", product, error });
+        res.render("products/details.ejs", { layout: "layout_second.ejs", product, error });
         return;
     }
     let cart = await Cart.findOne({ where: { userId: req.session.user.id, productId: req.params.id, optionId: req.body.option } })

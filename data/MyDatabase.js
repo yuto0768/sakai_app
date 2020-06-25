@@ -194,7 +194,7 @@ User.hasMany(Purchase);
 //これにより、PurchaseテーブルにproductId列が追加されます
 //1件の購入履歴に複数の製品を関連付ける場合は、n:nの関連付けにします。
 //n:n関連付けについては、1:1関連付けでの購入履歴ができてから、説明します。
-Purchase.belongsToMany(Product, { through: PurchaseProduct });
+//Purchase.belongsToMany(Product, { through: PurchaseProduct });
 Cart.belongsTo(User);
 Cart.belongsTo(Product);
 Cart.belongsTo(Option);

@@ -1,0 +1,79 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-top: 70px;
+    margin-bottom: 200px;
+}
+
+header {
+    height: 65px;
+    width: 100%;
+    background-color: rgba(34, 49, 52, 0.9);
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.header-right {
+    position: absolute;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: all 0.5s;
+}
+
+.header-right:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.header-right a {
+    line-height: 65px;
+    padding: 0 25px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    display: inline-block;
+}
+
+.header-center {
+    text-align: center;
+    padding: 0px;
+    font-size: 2em;
+    font-family: cursive;
+    color: white
+}
+
+.header-left {
+    position: absolute;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: all 0.5s;
+}
+
+.header-left:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.header-left a {
+    line-height: 65px;
+    padding: 0 25px;
+    color: white;
+    display: block;
+}
+
+.top-page {
+    text-align: center;
+    font-size: 40px;
+}
+
+footer {
+    background-color: #333;
+    padding-bottom: 20px;
+}
+
+.fotter-main {
+    text-align: center;
+    color: cornsilk;
+}

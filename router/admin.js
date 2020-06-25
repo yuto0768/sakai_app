@@ -187,8 +187,8 @@ router.get("/add", (req, res) => {
 router.get("/history", async(req, res) => {
     let rows = await Purchase.findAll({
         include: [
-            { model: User, required: true },
-            { model: Product, required: true }
+            { model: User, required: true } //,
+            //{ model: Product, required: true }
         ]
     })
     res.render("admin/history.ejs", { rows })

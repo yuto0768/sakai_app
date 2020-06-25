@@ -19,7 +19,7 @@ async function addmember(req, res) { //formで送られてきた情報はreqに�
     }
     if (Object.keys(error).length) {
         error.message = "未入力の項目があります。"
-        res.render("touroku_page.ejs", { data, error });
+        res.render("touroku_page.ejs", { layout: "footer_space.ejs", data, error });
     } else {
         await data.save();
         req.session.user = data;
@@ -29,7 +29,7 @@ async function addmember(req, res) { //formで送られてきた情報はreqに�
 
 router.get("/touroku", (req, res) => {
     let data = new User()
-    res.render("touroku_page.ejs", { data, error: {} }); //使用する変数を第２引数としてかく
+    res.render("touroku_page.ejs", { layout: "footer_space.ejs", data, error: {} }); //使用する変数を第２引数としてかく
 });
 
 router.post("/touroku", (req, res) => {

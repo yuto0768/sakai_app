@@ -15,7 +15,7 @@ router.get("/", paginate.middleware(1, 50), async(req, res) => {
             userId: req.session.user.id
         },
     })
-    res.render("user_history.ejs", { rows, format, paginate })
+    res.render("user_history.ejs", { layout: "layout_second.ejs", rows, format, paginate })
 });
 
 module.exports = router;
