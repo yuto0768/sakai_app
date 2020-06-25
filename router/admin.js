@@ -124,7 +124,9 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
         option.size = req.body.size;
         option.color = req.body.color;
         option.count = req.body.count;
+
         try {
+
             if (!data.name) {
                 error.name = "名前を入力してください。"
             }
@@ -152,8 +154,16 @@ async function addProduct(req, res) { //formで送られてきた情報はreqに
                 throw error;
             } else {
                 await data.save({ transaction: t });
-                option.productId = data.id;
-                await option.save({ transaction: t });
+
+                for (size of req.body.size.split(",")) {
+                    let option = await Option.create({
+                        productId: data.id,
+                        size: size,
+                        color: req.body.color,
+                        count: req.body.count,
+                    }, { transaction: t });
+                }
+
                 await t.commit()
                 res.redirect("/admin");
             }
